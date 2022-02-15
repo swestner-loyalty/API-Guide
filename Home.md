@@ -5,6 +5,7 @@
 - [Preamble](#preamble)
 - [Document Semantics, Formatting, and Naming](#document-semantics-formatting-and-naming)
 - [General Guidlines](#general-guidlines)
+  - [API first principle (#api-first-principle)](#api-first-principle-api-first-principle)
 
 MUST write APIs using English
   - URL's
@@ -87,10 +88,19 @@ URIs containing variable blocks are specified according to URI Template RFC 6570
 
 HTTP headers are written in title case + hyphenated syntax, e.g. Foo-Request-Id.
 
-
+   
 # General Guidlines
 
-[**MUST** follow API first principle](#api-first-principle)
+## API first principle (#api-first-principle)
+Before starting any coding of a RESTful service, the API interface must be designed first using OpenAPI. By focusing on the interface design first we
+- make our interface the primary concern, and treat it as a first class concern
+- create a single source of truth for the API specification
+- give the opportunity for early review from all technichal stakeholders
+
+What this does not mean is that 
+- we need to violate our agile practices. We do not expect to know all funcationality and requirements up front. We design the interface based off what we know
+- 
+
 
 
 MUST provide API specification using OpenAPI
@@ -120,7 +130,11 @@ https://gist.github.com/azhawkes/3db84b194b3e47423df2
 
 
 References
-https://www.ics.uci.edu/~fielding/pubs/dissertation/
+
+https://www.ics.uci.edu/~fielding/pubs/dissertation
+
 https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design
+
 https://cloud.google.com/apis/design
+
 https://opensource.zalando.com/restful-api-guidelines
