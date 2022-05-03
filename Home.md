@@ -333,10 +333,10 @@ All APIs must be written in U.S. English to keep the language and spelling consi
   A resource level is defined as any top level resource in the domain
 
 
-  *Example*   : `api.airmiles.ca/collectors/{id}`__
-                `api.airmiles.ca/collectors/{id}}/orders/{oid}`))
-                `api.airmiles.ca/collectors/segment`__
-                `api.airmiles.ca/orders/{id}}`__
+  |*Example* | `api.airmiles.ca/collectors/{id}`
+  |          | `api.airmiles.ca/collectors/{id}}/orders/{oid}`
+  |          | `api.airmiles.ca/collectors/segment`
+  |          | `api.airmiles.ca/orders/{id}}`
                
 
   Here we have 3 resources. One for collector, one for collector orders, and one for orders. We do not consider the segment resource as a new resource because there is a one to one relation between collectors and segments.
