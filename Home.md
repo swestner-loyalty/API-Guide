@@ -267,7 +267,7 @@ All APIs must be written in U.S. English to keep the language and spelling consi
     
   We must not pass data the could be considered sensitive (e.g. Personal Information (PI) like credit card numbers, user name etc) in the URLS since it will be exposed to various caching and logging technologies (browser cache, CDN, Splunk etc). 
 
-  _see overloaded POST for solutions_
+  _see [overloaded POST](#may-use-overloaded-post) for solutions_
 
 
   ## **MUST** pluralize resource names that are collections
@@ -447,15 +447,15 @@ All APIs must be written in U.S. English to keep the language and spelling consi
   
   An operation is considered [idempotent](https://tools.ietf.org/html/rfc7231#section-4.2.2) 
       
-      "if the intended effect on the server of multiple identical requests with that method is the same as the effect for a single such request."
+  > "if the intended effect on the server of multiple identical requests with that method is the same as the effect for a single such request."
 
-  For example multiple requests to DELETE the same resource should not cause an error.
+  For example multiple requests to DELETE on the same resource should not cause an error.
     
   ## **SHOULD** design POST, DELETE and PATCH idempotent
 
   In many cases it is helpful or even necessary to design `POST` and `PATCH` idempotent for clients to expose conflicts and prevent resource duplicate (a.k.a. zombie resources) or lost updates
   
-  For example, if same resources may be created or changed in parallel or multiple times via `POST`, using idempotent `POST` is recommended. 
+  For example, if the same resources may be created or changed in parallel or multiple times via `POST`, using idempotent `POST` is recommended. 
   
   ## **SHOULD** design simple query languages using query parameters
   We prefer the use of query parameters to describe resource-specific query languages for the majority of APIs because it’s native to HTTP, easy to extend and has excellent implementation support in HTTP clients and web frameworks.
@@ -527,13 +527,11 @@ All APIs must be written in U.S. English to keep the language and spelling consi
           
       *   Existing means are familiar to everyone
         
-    
 
-[JSON-specific rules](#json-guidelines) and most certainly needs to make use of the [`GET`\-with-body](#get-with-body) pattern.
-
+In these scenarios, [overloaded POST](#may-use-overloaded-post) will need to be used
 
 
-## **MAY** use overloaded POST
+  ## **MAY** use overloaded POST
   
   We should always make our absolute best effort to keep in the spirit of REST, and use the REST VERBs as intended. 
   
