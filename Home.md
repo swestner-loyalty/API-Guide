@@ -300,11 +300,13 @@ All APIs must be written in U.S. English to keep the language and spelling consi
   ## **MUST** use kebab-case for compound words in path segments
   We use kabab casining (e.g. kebab-case) to make our URL's more readable. Although there are many ways of making URL's more readable, for example using camel casing (e.g. camelCase) and title casing (e.g. TitleCase), they have their drawbacks. In particular, although URL's in browsers are case insensitive, a number of caching mechanism's both at the CDN and hardware level are not. This makes using kebab case the easiest and most reliable way of insuring human readble URL's with consistency of experience for the user
 
-  *Incorrect* : `api.airmiles.ca/CollectorExperience/1234`
-                `api.airmiles.ca/collectorExperience/1234` 
-                `api.airmiles.ca/collector_experience/1234` 
-    
-  *Correct*   : `api.airmiles.ca/collectors-experience/1234`  
+  *Incorrect* : <br>
+  `api.airmiles.ca/CollectorExperience/1234` <br>
+  `api.airmiles.ca/collectorExperience/1234` <br>
+  `api.airmiles.ca/collector_experience/1234` <br>
+
+  *Correct*   : <br>
+  `api.airmiles.ca/collectors-experience/1234`  
 
   ## **MUST** use snake_case for query parameters
   We use snake case for query parameters. This helps avoid various techniologies that are case sensitive in the web ecosystem and makes the query portion of the URL easily distinguishable from the canonical portion
@@ -333,10 +335,17 @@ All APIs must be written in U.S. English to keep the language and spelling consi
   A resource level is defined as any top level resource in the domain
 
 
-  |*Example* | `api.airmiles.ca/collectors/{id}`
-  |          | `api.airmiles.ca/collectors/{id}}/orders/{oid}`
-  |          | `api.airmiles.ca/collectors/segment`
-  |          | `api.airmiles.ca/orders/{id}}`
+
+
+| Normal Key | Value2 |
+
+  
+  *Examples*  
+  `api.airmiles.ca/collectors/{id}` <br>
+  `api.airmiles.ca/collectors/{id}}/orders/{oid}` <br>
+  `api.airmiles.ca/collectors/segment` <br>
+  `api.airmiles.ca/orders/{id}}`<br>
+
                
 
   Here we have 3 resources. One for collector, one for collector orders, and one for orders. We do not consider the segment resource as a new resource because there is a one to one relation between collectors and segments.
@@ -348,10 +357,12 @@ All APIs must be written in U.S. English to keep the language and spelling consi
   ## **SHOULD NOT** use null or empty values for query parameter filtering
   We should not use null values as input or state indicators. Instead we should either build up a domain specific language, or use a null object pattern to indicate the absense of a value.
 
-  *Incorrect* : `api.airmiles.ca/collectors/{id}/segments?type=null`
-                `api.airmiles.ca/collectors/{id}/segments?type=`
+  *Incorrect* : <br>
+  `api.airmiles.ca/collectors/{id}/segments?type=null`<br>
+  `api.airmiles.ca/collectors/{id}/segments?type=`
                     
-  *Correct*   : `api.airmiles.ca/collectors-experience/1234?type=none` 
+  *Correct*   : <br> 
+  `api.airmiles.ca/collectors-experience/1234?type=none` 
 
 
 # Security 
