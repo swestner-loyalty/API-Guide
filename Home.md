@@ -726,7 +726,7 @@ In these scenarios, [overloaded POST](#may-use-overloaded-post) will need to be 
 
   For major concerns regarding the promised advantages of HATEOAS (see also [RESTistential Crisis over Hypermedia APIs](https://www.infoq.com/news/2014/03/rest-at-odds-with-web-apis), [Why I Hate HATEOAS](https://jeffknupp.com/blog/2014/06/03/why-i-hate-hateoas/) and others for a detailed discussion):
 
-  *   We follow the [API First principle](#100) with APIs explicitly defined outside the code with standard specification language. HATEOAS does not really add value for SOA client engineers in terms of API self-descriptiveness: a client engineer finds necessary links and usage description (depending on resource state) in the API reference definition anyway.
+  *   We follow the [API First principle](#api-first-principle) with APIs explicitly defined outside the code with standard specification language. HATEOAS does not really add value for SOA client engineers in terms of API self-descriptiveness: a client engineer finds necessary links and usage description (depending on resource state) in the API reference definition anyway.
         
   *   Generic HATEOAS clients which need no prior knowledge about APIs and explore API capabilities based on hypermedia information provided, is a theoretical concept that we haven’t seen working in practice and does not fit to our SOA set-up. The OpenAPI description format (and tooling based on OpenAPI) doesn’t provide sufficient support for HATEOAS either.
         
@@ -751,9 +751,9 @@ In these scenarios, [overloaded POST](#may-use-overloaded-post) will need to be 
       
   * querying field filters to retrieve a subset of resource attributes (see `**SHOULD** support partial responses via filtering` below)
       
-  * [ETag`](https://tools.ietf.org/html/rfc7232#section-2.3) and [`If-Match`](https://tools.ietf.org/html/rfc7232#section-3.1)/[`If-None-Match`](https://tools.ietf.org/html/rfc7232#section-3.2) headers to avoid re-fetching of unchanged resources
+  * [`ETag`](https://tools.ietf.org/html/rfc7232#section-2.3) and [`If-Match`](https://tools.ietf.org/html/rfc7232#section-3.1)/[`If-None-Match`](https://tools.ietf.org/html/rfc7232#section-3.2) headers to avoid re-fetching of unchanged resources
       
-  * [Using Pagination for incremental access of larger collections of data items
+  * using pagination for incremental access of larger collections of data items
       
   * caching of master data items, i.e. resources that change rarely or not at all after creation.  
 
@@ -836,7 +836,7 @@ In these scenarios, [overloaded POST](#may-use-overloaded-post) will need to be 
   *   introduce new API versions and still support older versions with `deprecation`
       
 
-  We strongly encourage using compatible API extensions and discourage versioning (see `**SHOULD** avoid versioning` and `**MUST** use media type versioning` below). The following guidelines for service providers (`**SHOULD** prefer compatible extensions`) and consumers (`**MUST** prepare clients to accept compatible API extensions`) enable us (having Postel’s Law in mind) to make compatible changes without versioning.
+  We strongly encourage using compatible API extensions and discourage versioning (see `SHOULD avoid versioning` and `MUST use media type versioning` below). The following guidelines for service providers (`SHOULD prefer compatible extensions`) and consumers (`MUST prepare clients to accept compatible API extensions`) enable us (having Postel’s Law in mind) to make compatible changes without versioning.
 
   **Note:** There is a difference between incompatible and breaking changes. Incompatible changes are changes that are not covered by the compatibility rules below. Breaking changes are incompatible changes deployed into operation, and thereby breaking running API consumers. Usually, incompatible changes are breaking changes when deployed into operation. However, in specific controlled situations it is possible to deploy incompatible changes in a non-breaking way, if no API consumer is using the affected API aspects (see also `Deprecation` guidelines).
 
