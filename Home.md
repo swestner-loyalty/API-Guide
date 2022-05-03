@@ -326,15 +326,17 @@ All APIs must be written in U.S. English to keep the language and spelling consi
 
 
   ## **SHOULD** limit number of resource types
-  As a general rule, having more than 3-4 resources levels is a good indication that the problem space is too large, and we are violating the single responsabiltiy principle. In these cases we should consider breaking down the problem domain into it's subsequent parts
+  As a general rule, having more than 3-4 resources levels is a good indication that the problem space is too large, and we are violating the single responsabiltiy principle. 
+  
+  In these cases we should consider breaking down the problem domain into it's subsequent parts
 
   A resource level is defined as any top level resource in the domain
 
 
-  *Example*   : `api.airmiles.ca/collectors/{id}`
-                `api.airmiles.ca/collectors/{id}}/orders/{oid}`
-                `api.airmiles.ca/collectors/segment`
-                `api.airmiles.ca/orders/{id}}`
+  *Example*   : `api.airmiles.ca/collectors/{id}`__
+                `api.airmiles.ca/collectors/{id}}/orders/{oid}`))
+                `api.airmiles.ca/collectors/segment`__
+                `api.airmiles.ca/orders/{id}}`__
                 
 
   Here we have 3 resources. One for collector, one for collector orders, and one for orders. We do not consider the segment resource as a new resource because there is a one to one relation between collectors and segments.
