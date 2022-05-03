@@ -1,81 +1,81 @@
 # AMRP API Platform Design Standards
 - [AMRP API Platform Design Standards](#amrp-api-platform-design-standards)
   - [Introduction](#introduction)
-  - [Document Semantics, Formatting, and Naming](#document-semantics-formatting-and-naming)
+    - [Document Semantics, Formatting, and Naming](#document-semantics-formatting-and-naming)
   - [Principles](#principles)
     - [API design principles](#api-design-principles)
     - [API as a product](#api-as-a-product)
     - [API first](#api-first)
-- [General Guidelines](#general-guidelines)
-  - [**MUST** design the API first](#must-design-the-api-first)
-  - [**MUST** provide API specification using OpenAPI](#must-provide-api-specification-using-openapi)
-  - [**SHOULD** provide API user manual](#should-provide-api-user-manual)
-  - [**MUST** write APIs using U.S. English](#must-write-apis-using-us-english)
-  - [# URLs](#-urls)
-  - [**MUST** keep URLs verb-free](#must-keep-urls-verb-free)
-  - [**MUST NOT** pass sensitive information in the URL](#must-not-pass-sensitive-information-in-the-url)
-  - [**MUST** pluralize resource names that are collections](#must-pluralize-resource-names-that-are-collections)
-  - [**MUST** use normalized paths without empty path segments and trailing slashes](#must-use-normalized-paths-without-empty-path-segments-and-trailing-slashes)
-  - [**MUST** use kebab-case for compound words in path segments](#must-use-kebab-case-for-compound-words-in-path-segments)
-  - [**MUST** use snake_case for query parameters](#must-use-snake_case-for-query-parameters)
-  - [**MUST** stick to conventional query parameters](#must-stick-to-conventional-query-parameters)
-  - [**SHOULD** limit number of resource types](#should-limit-number-of-resource-types)
-  - [**SHOULD NOT** use null or empty values for query parameter filtering](#should-not-use-null-or-empty-values-for-query-parameter-filtering)
-  - [# Security](#-security)
-  - [**MUST** secure endpoints](#must-secure-endpoints)
-  - [**MUST** not expose stack traces](#must-not-expose-stack-traces)
-  - [# Payloads](#-payloads)
-  - [**MUST** support JSON as payload data interchange format](#must-support-json-as-payload-data-interchange-format)
-  - [**MUST** support JSON in UTF-8](#must-support-json-in-utf-8)
-  - [**MUST** use JSON payloads conatianing only valid Unicode strings](#must-use-json-payloads-conatianing-only-valid-unicode-strings)
-  - [**MUST** use JSON payloads consisting of unique member names](#must-use-json-payloads-consisting-of-unique-member-names)
-  - [**SHOULD** not use null for empty arrays](#should-not-use-null-for-empty-arrays)
-  - [**MAY** pass non-JSON media types using data specific standard formats](#may-pass-non-json-media-types-using-data-specific-standard-formats)
-  - [# HTTP Requests](#-http-requests)
-  - [**MUST** use HTTP methods correctly](#must-use-http-methods-correctly)
-  - [**MUST** design GET, HEAD, OPTIONS, TRACE to be safe](#must-design-get-head-options-trace-to-be-safe)
-  - [**MUST** design GET, PUT, DELETE, HEAD and OPTIONS to be idempotent](#must-design-get-put-delete-head-and-options-to-be-idempotent)
-  - [**SHOULD** design POST, DELETE and PATCH idempotent](#should-design-post-delete-and-patch-idempotent)
-  - [**SHOULD** design simple query languages using query parameters](#should-design-simple-query-languages-using-query-parameters)
-  - [**SHOULD** design complex query languages using JSON](#should-design-complex-query-languages-using-json)
-  - [**MAY** use overloaded POST](#may-use-overloaded-post)
-  - [#  HTTP Status Codes](#--http-status-codes)
-  - [**MUST** use official HTTP status codes](#must-use-official-http-status-codes)
-  - [**SHOULD** only use most common HTTP status codes](#should-only-use-most-common-http-status-codes)
-    - [Success codes](#success-codes)
-    - [Redirection codes](#redirection-codes)
-    - [Client side error codes](#client-side-error-codes)
-    - [Server side error codes:](#server-side-error-codes)
-  - [**MUST** use most specific HTTP status codes](#must-use-most-specific-http-status-codes)
-  - [# HTTP Headers](#-http-headers)
-  - [**MUST** use kebab-case with uppercase separate words for HTTP headers](#must-use-kebab-case-with-uppercase-separate-words-for-http-headers)
-  - [**MUST** propagate proprietary headers](#must-propagate-proprietary-headers)
-  - [**SHOULD** use only the specified proprietary AMRP headers (provide list)](#should-use-only-the-specified-proprietary-amrp-headers-provide-list)
-  - [**MAY** use standard headers](#may-use-standard-headers)
-  - [**MAY** consider to support Idempotency-Key header](#may-consider-to-support-idempotency-key-header)
-  - [# REST Compliance Levels](#-rest-compliance-levels)
-  - [**MUST** use REST maturity level 2](#must-use-rest-maturity-level-2)
-  - [**MAY** use REST maturity level 3 - HATEOAS](#may-use-rest-maturity-level-3---hateoas)
-  - [# Performance](#-performance)
-  - [**SHOULD** reduce bandwidth needs and improve responsiveness](#should-reduce-bandwidth-needs-and-improve-responsiveness)
-  - [**SHOULD** use gzip compression](#should-use-gzip-compression)
-  - [**SHOULD** support partial responses via filtering](#should-support-partial-responses-via-filtering)
-    - [Unfiltered](#unfiltered)
-    - [Filtered](#filtered)
-  - [# Compatibility and Versioning](#-compatibility-and-versioning)
-  - [**MUST** not break backward compatibility](#must-not-break-backward-compatibility)
-  - [**MUST** not use URL versioning](#must-not-use-url-versioning)
-  - [**MUST** prepare clients to accept compatible API extensions](#must-prepare-clients-to-accept-compatible-api-extensions)
-  - [**SHOULD** avoid versioning](#should-avoid-versioning)
-  - [**SHOULD** prefer compatible extensions](#should-prefer-compatible-extensions)
-  - [**SHOULD** design APIs conservatively](#should-design-apis-conservatively)
-  - [# Data formats](#-data-formats)
-  - [**SHOULD** use standard data formats](#should-use-standard-data-formats)
-  - [**MUST** use standard formats for date and time properties](#must-use-standard-formats-for-date-and-time-properties)
-  - [**MUST** use standard formats for country, language and currency properties](#must-use-standard-formats-for-country-language-and-currency-properties)
-  - [**SHOULD** use content negotiation, if clients may choose from different resource representations](#should-use-content-negotiation-if-clients-may-choose-from-different-resource-representations)
+  - [General Guidelines](#general-guidelines)
+    - [**MUST** design the API first](#must-design-the-api-first)
+    - [**MUST** provide API specification using OpenAPI](#must-provide-api-specification-using-openapi)
+    - [**SHOULD** provide API user manual](#should-provide-api-user-manual)
+    - [**MUST** write APIs using U.S. English](#must-write-apis-using-us-english)
+  - [URLs](#urls)
+    - [**MUST** keep URLs verb-free](#must-keep-urls-verb-free)
+    - [**MUST NOT** pass sensitive information in the URL](#must-not-pass-sensitive-information-in-the-url)
+    - [**MUST** pluralize resource names that are collections](#must-pluralize-resource-names-that-are-collections)
+    - [**MUST** use normalized paths without empty path segments and trailing slashes](#must-use-normalized-paths-without-empty-path-segments-and-trailing-slashes)
+    - [**MUST** use kebab-case for compound words in path segments](#must-use-kebab-case-for-compound-words-in-path-segments)
+    - [**MUST** use snake_case for query parameters](#must-use-snake_case-for-query-parameters)
+    - [**MUST** stick to conventional query parameters](#must-stick-to-conventional-query-parameters)
+    - [**SHOULD** limit number of resource types](#should-limit-number-of-resource-types)
+    - [**SHOULD NOT** use null or empty values for query parameter filtering](#should-not-use-null-or-empty-values-for-query-parameter-filtering)
+  - [Security](#security)
+    - [**MUST** secure endpoints](#must-secure-endpoints)
+    - [**MUST** not expose stack traces](#must-not-expose-stack-traces)
+  - [Payloads](#payloads)
+    - [**MUST** support JSON as payload data interchange format](#must-support-json-as-payload-data-interchange-format)
+    - [**MUST** support JSON in UTF-8](#must-support-json-in-utf-8)
+    - [**MUST** use JSON payloads conatianing only valid Unicode strings](#must-use-json-payloads-conatianing-only-valid-unicode-strings)
+    - [**MUST** use JSON payloads consisting of unique member names](#must-use-json-payloads-consisting-of-unique-member-names)
+    - [**SHOULD** not use null for empty arrays](#should-not-use-null-for-empty-arrays)
+    - [**MAY** pass non-JSON media types using data specific standard formats](#may-pass-non-json-media-types-using-data-specific-standard-formats)
+  - [HTTP Requests](#http-requests)
+    - [**MUST** use HTTP methods correctly](#must-use-http-methods-correctly)
+    - [**MUST** design GET, HEAD, OPTIONS, TRACE to be safe](#must-design-get-head-options-trace-to-be-safe)
+    - [**MUST** design GET, PUT, DELETE, HEAD and OPTIONS to be idempotent](#must-design-get-put-delete-head-and-options-to-be-idempotent)
+    - [**SHOULD** design POST, DELETE and PATCH idempotent](#should-design-post-delete-and-patch-idempotent)
+    - [**SHOULD** design simple query languages using query parameters](#should-design-simple-query-languages-using-query-parameters)
+    - [**SHOULD** design complex query languages using JSON](#should-design-complex-query-languages-using-json)
+    - [**MAY** use overloaded POST](#may-use-overloaded-post)
+  - [HTTP Status Codes](#http-status-codes)
+    - [**MUST** use official HTTP status codes](#must-use-official-http-status-codes)
+    - [**SHOULD** only use most common HTTP status codes](#should-only-use-most-common-http-status-codes)
+      - [Success codes](#success-codes)
+      - [Redirection codes](#redirection-codes)
+      - [Client side error codes](#client-side-error-codes)
+      - [Server side error codes:](#server-side-error-codes)
+    - [**MUST** use most specific HTTP status codes](#must-use-most-specific-http-status-codes)
+  - [HTTP Headers](#http-headers)
+    - [**MUST** use kebab-case with uppercase separate words for HTTP headers](#must-use-kebab-case-with-uppercase-separate-words-for-http-headers)
+    - [**MUST** propagate proprietary headers](#must-propagate-proprietary-headers)
+    - [**SHOULD** use only the specified proprietary AMRP headers (provide list)](#should-use-only-the-specified-proprietary-amrp-headers-provide-list)
+    - [**MAY** use standard headers](#may-use-standard-headers)
+    - [**MAY** consider to support Idempotency-Key header](#may-consider-to-support-idempotency-key-header)
+  - [REST Compliance Levels](#rest-compliance-levels)
+    - [**MUST** use REST maturity level 2](#must-use-rest-maturity-level-2)
+    - [**MAY** use REST maturity level 3 - HATEOAS](#may-use-rest-maturity-level-3---hateoas)
+  - [Performance](#performance)
+    - [**SHOULD** reduce bandwidth needs and improve responsiveness](#should-reduce-bandwidth-needs-and-improve-responsiveness)
+    - [**SHOULD** use gzip compression](#should-use-gzip-compression)
+    - [**SHOULD** support partial responses via filtering](#should-support-partial-responses-via-filtering)
+      - [Unfiltered](#unfiltered)
+      - [Filtered](#filtered)
+  - [Compatibility and Versioning](#compatibility-and-versioning)
+    - [**MUST** not break backward compatibility](#must-not-break-backward-compatibility)
+    - [**MUST** not use URL versioning](#must-not-use-url-versioning)
+    - [**MUST** prepare clients to accept compatible API extensions](#must-prepare-clients-to-accept-compatible-api-extensions)
+    - [**SHOULD** avoid versioning](#should-avoid-versioning)
+    - [**SHOULD** prefer compatible extensions](#should-prefer-compatible-extensions)
+    - [**SHOULD** design APIs conservatively](#should-design-apis-conservatively)
+  - [Data formats](#data-formats)
+    - [**SHOULD** use standard data formats](#should-use-standard-data-formats)
+    - [**MUST** use standard formats for date and time properties](#must-use-standard-formats-for-date-and-time-properties)
+    - [**MUST** use standard formats for country, language and currency properties](#must-use-standard-formats-for-country-language-and-currency-properties)
+    - [**SHOULD** use content negotiation, if clients may choose from different resource representations](#should-use-content-negotiation-if-clients-may-choose-from-different-resource-representations)
 - [Accredidation](#accredidation)
-    
+
 # Introduction
 --------------------
 The purpose of this document is to ensure consistency and the standard application of practices when designing and implementing API's at AMRP. It details the requirements, conventions and best practices on how to create an API that is maintainable, extensible, discoverable and consistent. This facilitates a great developer experience and the ability to quickly compose business value.
@@ -84,17 +84,17 @@ Airmiles software architecture centers around decoupled microservices that provi
 
 With this in mind, we’ve adopted "API First" as one of our key engineering principles. Microservices development begins with API definition outside the code and involves ample peer-review feedback to achieve high-quality APIs. API First encompasses a set of quality-related standards and fosters a peer review culture including a lightweight review procedure. We encourage our teams to follow them to ensure that our APIs:
 
- * are easy to understand and learn
+* are easy to understand and learn
 
- * are general and abstracted from specific implementation and use cases
+* are general and abstracted from specific implementation and use cases
 
- * are robust and easy to use
+* are robust and easy to use
 
- * have a common look and feel
+* have a common look and feel
 
- * follow a consistent RESTful style and syntax
+* follow a consistent RESTful style and syntax
 
- * are consistent with other teams’ APIs and our global architecture
+* are consistent with other teams’ APIs and our global architecture
 
 Ideally, all Airmiles APIs will look like the same author created them.
 
@@ -104,82 +104,81 @@ Further we recoginize that we are dealing with existing implementations. To this
   
 * clients of existing APIs have to cope with these APIs based on outdated rules
   
-* new APIs have to respect the current guidelines
+* new APIs have to respect the current guidelines$$
 
 
 **Note :** all example URL's used in this document are fictitous. They do not really exists and are used here only for illustrative purposes
 
 **Accrediation** : This guide relies on and borrows heavily from a number of open source, and widely used reference. We give thanks to theses sources for helping along our journey, and letting us build off of thier work and expereinces. Please see the the [Accredidation](#accredidation) sections for notable sources 
 
-## Document Semantics, Formatting, and Naming
-The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
+  ## Document Semantics, Formatting, and Naming
+    The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
 
-The words "REST" and "RESTful" MUST be written as presented here, representing the acronym as all upper-case letters. This is also true of "JSON," "XML," and other acronyms.
+    The words "REST" and "RESTful" MUST be written as presented here, representing the acronym as all upper-case letters. This is also true of "JSON," "XML," and other acronyms.
 
-Machine-readable text, such as URLs, HTTP verbs, and source code, are represented using a fixed-width font.
+    Machine-readable text, such as URLs, HTTP verbs, and source code, are represented using a fixed-width font.
 
-URIs containing variable blocks are specified according to URI Template RFC 6570. For example, a URL containing a variable called account_id would be shown as https://foo.com/accounts/{account_id}.
+    URIs containing variable blocks are specified according to URI Template RFC 6570. For example, a URL containing a variable called account_id would be shown as https://foo.com/accounts/{account_id}.
 
-HTTP headers are written in title case + hyphenated syntax, e.g. Foo-Request-Id.
-
+    HTTP headers are written in title case + hyphenated syntax, e.g. Foo-Request-Id.
 
 # Principles
 --------------------
-### [API design principles](#api-design-principles)
+  ## API design principles
 
-Comparing SOA web service interfacing style of SOAP vs. REST, the former tend to be centered around operations that are usually use-case specific and specialized. In contrast, REST is centered around business (data) entities exposed as resources that are identified via URIs and can be manipulated via standardized CRUD-like methods using different representations, and hypermedia. RESTful APIs tend to be less use-case specific and come with less rigid client / server coupling and are more suitable for an ecosystem of (core) services providing a platform of APIs to build diverse new business services. We apply the RESTful web service principles to all kind of application (micro-) service components, independently from whether they provide functionality via the internet or intranet.
+  Comparing SOA web service interfacing style of SOAP vs. REST, the former tend to be centered around operations that are usually use-case specific and specialized. In contrast, REST is centered around business (data) entities exposed as resources that are identified via URIs and can be manipulated via standardized CRUD-like methods using different representations, and hypermedia. RESTful APIs tend to be less use-case specific and come with less rigid client / server coupling and are more suitable for an ecosystem of (core) services providing a platform of APIs to build diverse new business services. We apply the RESTful web service principles to all kind of application (micro-) service components, independently from whether they provide functionality via the internet or intranet.
 
-*   We prefer REST-based APIs with JSON payloads
+  *   We prefer REST-based APIs with JSON payloads
+      
+  *   We prefer systems to be truly RESTful ([maturity level 2](https://martinfowler.com/articles/richardsonMaturityModel.html#level2)
+      
+
+  An important principle for API design and usage is Postel’s Law, aka [The Robustness Principle](http://en.wikipedia.org/wiki/Robustness_principle) (see also [RFC 1122](https://tools.ietf.org/html/rfc1122)):
+
+  *   Be liberal in what you accept, be conservative in what you send
+      
+
+  _Readings:_ Some interesting reads on the RESTful API design style and service architecture:
+
+  *   Article: [REST API Design - Resource Modeling](https://www.thoughtworks.com/insights/blog/rest-api-design-resource-modeling)
+      
+  *   Article: [Richardson Maturity Model — Steps toward the glory of REST](https://martinfowler.com/articles/richardsonMaturityModel.html)
+      
+  *   Book: [Irresistible APIs: Designing web APIs that developers will love](https://www.amazon.de/Irresistible-APIs-Designing-that-developers/dp/1617292559)
+      
+  *   Book: [REST in Practice: Hypermedia and Systems Architecture](http://www.amazon.de/REST-Practice-Hypermedia-Systems-Architecture/dp/0596805829)
+      
+  *   Book: [Build APIs You Won’t Hate](https://leanpub.com/build-apis-you-wont-hate)
+      
+  *   Fielding Dissertation: [Architectural Styles and the Design of Network-Based Software Architectures](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
+      
+
+  ## API as a product
+
+  As a company we want to deliver products to our (internal and external) clients which can be consumed like a service. Embracing 'API as a Product' facilitates a service ecosystem, which can be evolved more easily and used to experiment quickly with new business ideas by recombining core capabilities. It makes the difference between agile, innovative product service business built on a platform of APIs and ordinary enterprise integration business where APIs are provided as "appendix" of existing products to support system integration and optimised for local server-side realization.
+
+  Platform products provide their functionality via (public) APIs; hence, the design of our APIs should be based on the API as a Product principle:
+
+  *   Treat your API as product and act like a product owner
+      
+  *   Put yourself into the place of your user; be an advocate for their needs
+      
+  *   Emphasize simplicity, comprehensibility, and usability of APIs to make them irresistible for client engineers
+      
+  *   Actively improve and maintain API consistency over the long term
+      
+  *   Make use of customer feedback and provide service level support
+
+  *   Understand the concrete use cases of your customers and carefully check the trade-offs of your API design variants with a product mindset. 
+
+  *   Avoid short-term implementation optimizations, 
+
+  *   Have a high attention on API quality and client developer experience.
     
-*   We prefer systems to be truly RESTful ([maturity level 2](https://martinfowler.com/articles/richardsonMaturityModel.html#level2)
-    
 
-An important principle for API design and usage is Postel’s Law, aka [The Robustness Principle](http://en.wikipedia.org/wiki/Robustness_principle) (see also [RFC 1122](https://tools.ietf.org/html/rfc1122)):
+  API as a Product is closely related to our [API First principle](#100) (see next chapter) which is more focused on how we engineer high quality APIs.
 
-*   Be liberal in what you accept, be conservative in what you send
-    
-
-_Readings:_ Some interesting reads on the RESTful API design style and service architecture:
-
-*   Article: [REST API Design - Resource Modeling](https://www.thoughtworks.com/insights/blog/rest-api-design-resource-modeling)
-    
-*   Article: [Richardson Maturity Model — Steps toward the glory of REST](https://martinfowler.com/articles/richardsonMaturityModel.html)
-    
-*   Book: [Irresistible APIs: Designing web APIs that developers will love](https://www.amazon.de/Irresistible-APIs-Designing-that-developers/dp/1617292559)
-    
-*   Book: [REST in Practice: Hypermedia and Systems Architecture](http://www.amazon.de/REST-Practice-Hypermedia-Systems-Architecture/dp/0596805829)
-    
-*   Book: [Build APIs You Won’t Hate](https://leanpub.com/build-apis-you-wont-hate)
-    
-*   Fielding Dissertation: [Architectural Styles and the Design of Network-Based Software Architectures](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
-    
-
-### [API as a product](#api-as-a-product)
-
-As a company we want to deliver products to our (internal and external) clients which can be consumed like a service. Embracing 'API as a Product' facilitates a service ecosystem, which can be evolved more easily and used to experiment quickly with new business ideas by recombining core capabilities. It makes the difference between agile, innovative product service business built on a platform of APIs and ordinary enterprise integration business where APIs are provided as "appendix" of existing products to support system integration and optimised for local server-side realization.
-
-Platform products provide their functionality via (public) APIs; hence, the design of our APIs should be based on the API as a Product principle:
-
-*   Treat your API as product and act like a product owner
-    
-*   Put yourself into the place of your user; be an advocate for their needs
-    
-*   Emphasize simplicity, comprehensibility, and usability of APIs to make them irresistible for client engineers
-    
-*   Actively improve and maintain API consistency over the long term
-    
-*   Make use of customer feedback and provide service level support
-
-*   Understand the concrete use cases of your customers and carefully check the trade-offs of your API design variants with a product mindset. 
-
-*   Avoid short-term implementation optimizations, 
-
-*   Have a high attention on API quality and client developer experience.
-  
-
-API as a Product is closely related to our [API First principle](#100) (see next chapter) which is more focused on how we engineer high quality APIs.
-
-### [API first](#api-first)
+  ## API first
 
 API First is one of our core requirements. In a nutshell API First requires two aspects:
 
@@ -213,141 +212,141 @@ On the other hand, API First obviously is in conflict with the bad practice of p
 
 
 # General Guidelines
+--------------------
+  ## **MUST** design the API first
 
-## **MUST** design the API first
+  You must follow the [API First Principle](#api-first), more specifically:
 
-You must follow the [API First Principle](#api-first), more specifically:
-
-*   You must define APIs first, before coding its implementation, [using OpenAPI as specification language](#101)
-    
-*   You must design your APIs consistently with these guidelines; 
-    
-*   You must call for early review feedback from peers and client developers for all component external facing APIs
-
-
-
-## **MUST** provide API specification using OpenAPI
+  *   You must define APIs first, before coding its implementation, [using OpenAPI as specification language](#101)
+      
+  *   You must design your APIs consistently with these guidelines; 
+      
+  *   You must call for early review feedback from peers and client developers for all component external facing APIs
 
 
-We use the [OpenAPI specification](http://swagger.io/specification/) as standard to define API specification files. API designers are required to provide the API specification using a single **self-contained YAML** file to improve readability. We encourage to use **OpenAPI 3.0** version, but still support **OpenAPI 2.0** (a.k.a. Swagger 2).
 
-The API specification files should be subject to version control using a source code management system - together with the implementing sources.
-
-You must publish the component  API specification with the deployment of the implementing service, and, hence, make it discoverable.
-
-**Hint:** A good way to explore **OpenAPI 3.0/2.0** is to navigate through the [OpenAPI specification mind map](https://openapi-map.apihandyman.io/).
+  ## **MUST** provide API specification using OpenAPI
 
 
-## **SHOULD** provide API user manual
+  We use the [OpenAPI specification](http://swagger.io/specification/) as standard to define API specification files. API designers are required to provide the API specification using a single **self-contained YAML** file to improve readability. We encourage to use **OpenAPI 3.0** version, but still support **OpenAPI 2.0** (a.k.a. Swagger 2).
 
-In addition to the API Specification, it is good practice to provide an API user manual to improve client developer experience, especially of engineers that are less experienced in using this API. A helpful API user manual typically describes the following API aspects:
+  The API specification files should be subject to version control using a source code management system - together with the implementing sources.
 
-*   API scope, purpose, and use cases
-    
-*   concrete examples of API usage
-    
-*   edge cases, error situation details, and repair hints
-    
-*   architecture context and major dependencies - including figures and sequence flows
-    
+  You must publish the component  API specification with the deployment of the implementing service, and, hence, make it discoverable.
 
-The user manual must be published online. Please do not forget to include a link to the API user manual into the API specification using the `#/externalDocs/url` property.
+  **Hint:** A good way to explore **OpenAPI 3.0/2.0** is to navigate through the [OpenAPI specification mind map](https://openapi-map.apihandyman.io/).
 
-## **MUST** write APIs using U.S. English
+
+  ## **SHOULD** provide API user manual
+
+  In addition to the API Specification, it is good practice to provide an API user manual to improve client developer experience, especially of engineers that are less experienced in using this API. A helpful API user manual typically describes the following API aspects:
+
+  *   API scope, purpose, and use cases
+      
+  *   concrete examples of API usage
+      
+  *   edge cases, error situation details, and repair hints
+      
+  *   architecture context and major dependencies - including figures and sequence flows
+      
+
+  The user manual must be published online. Please do not forget to include a link to the API user manual into the API specification using the `#/externalDocs/url` property.
+
+  ## **MUST** write APIs using U.S. English
 All APIs must be written in U.S. English to keep the language and spelling consistent
 
 # URLs
 --------------------
-## **MUST** keep URLs verb-free
-  Verbs must not appear in URL's. REST URL's define resources, not actions. Instead actions are indicated as part of the HTTP method. 
+  ## **MUST** keep URLs verb-free
+    Verbs must not appear in URL's. REST URL's define resources, not actions. Instead actions are indicated as part of the HTTP method. 
 
-  *Incorrect* : `GET api.airmiles.ca/collectors/search`                       
-    
-  *Correct*   : `GET api.airmiles.ca/collectors/searches`
-
-## **MUST NOT** pass sensitive information in the URL
-  
-  We must not pass data the could be considered sensitive (e.g. Personal Information (PI) like credit card numbers, user name etc) in the URLS since it will be exposed to various caching and logging technologies (browser cache, CDN, Splunk etc). 
-
-  ***see overloaded POST for solutions
-
-
-## **MUST** pluralize resource names that are collections
-  The majority of resources available in a RESTful API are collections. These should be pluralized to indicate they are access points to many resources
-
-  Example : 
-
-    Incorrect : /collector/{id}
-    Correct   : /collectors/{id}
-
-
-  In cases where the resource is a singular entity, the pluralization may be dropped.
-
-  Example : 
-
-      /collectors/{id}/config
+    *Incorrect* : `GET api.airmiles.ca/collectors/search`                       
       
-  Here we have a one to one relationship between the collector and their config. In this case we do not need to pluralize. If the collector had more than one conifg, then we would need to pluralize like `/collectors/{id}/configs/{cid}`
+    *Correct*   : `GET api.airmiles.ca/collectors/searches`
 
-  
-
-
-## **MUST** use normalized paths without empty path segments and trailing slashes
-  Resources must not end with a slash
-
-  *Incorrect* : `api.airmiles.ca/collectors/1234/` 
-                `api.airmiles.ca/collectors/1234//`
-                `api.airmiles.ca/collectors///1234//`
-  
-  *Correct*   : `api.airmiles.ca/collectors/1234`
-
-
-## **MUST** use kebab-case for compound words in path segments
-  We use kabab casining (e.g. kebab-case) to make our URL's more readable. Although there are many ways of making URL's more readable, for example using camel casing (e.g. camelCase) and title casing (e.g. TitleCase), they have their drawbacks. In particular, although URL's in browsers are case insensitive, a number of caching mechanism's both at the CDN and hardware level are not. This makes using kebab case the easiest and most reliable way of insuring human readble URL's with consistency of experience for the user
-
-  *Incorrect* : `api.airmiles.ca/CollectorExperience/1234`
-                `api.airmiles.ca/collectorExperience/1234` 
+  ## **MUST NOT** pass sensitive information in the URL
     
-  *Correct*   : `api.airmiles.ca/collectors-experience/1234`  
+    We must not pass data the could be considered sensitive (e.g. Personal Information (PI) like credit card numbers, user name etc) in the URLS since it will be exposed to various caching and logging technologies (browser cache, CDN, Splunk etc). 
 
-## **MUST** use snake_case for query parameters
-  We use snake case for query parameters. This helps avoid various techniologies that are case sensitive in the web ecosystem
-
-    *Example* : `api.airmiles.ca/collector/1234?order_id=1234` 
- 
-## **MUST** stick to conventional query parameters
-  If you provide query support for searching, sorting, filtering, and paginating, you must stick to the following naming conventions:
-
-  q: default query parameter, e.g. used by browser tab completion; should have an entity specific alias, e.g. sku.
-
-  sort: comma-separated list of fields (as defined by MUST define collection format of header and query parameters) to define the sort order. To indicate sorting direction, fields may be prefixed with + (ascending) or - (descending), e.g. /sales-orders?sort=+id.
-
-  offset: numeric offset of the first element provided on a page representing a collection request. 
-
-  limit: client suggested limit to restrict the number of entries on a page.
-
-  fields: field name expression to retrieve only a subset of fields of a resource. See `SHOULD support partial responses via filtering` below.
+    ***see overloaded POST for solutions
 
 
-## **SHOULD** limit number of resource types
-As a general rule, having more than 3-4 resources levels is a good indication that the problem space is too large, and we are violating the single responsabiltiy principle. In these cases we should consider breaking down the problem domain into it's subsequent parts
+  ## **MUST** pluralize resource names that are collections
+    The majority of resources available in a RESTful API are collections. These should be pluralized to indicate they are access points to many resources
 
-A resource level is defined as any top level resource in the domain
+    Example : 
+
+      Incorrect : /collector/{id}
+      Correct   : /collectors/{id}
 
 
-*Example*   : `api.airmiles.ca/collectors/{id}`
-              `api.airmiles.ca/collectors/{id}}/orders/{oid}`
-              `api.airmiles.ca/collectors/segment`
-              `api.airmiles.ca/orders/{id}}`
-              
+    In cases where the resource is a singular entity, the pluralization may be dropped.
 
-Here we have 3 resources. One for collector, one for collector orders, and one for orders. We do not consider the segment resource as a new resource because there is a one to one relation between collectors and segments.
+    Example : 
 
-Given this definition, our experience is that well defined APIs involve no more than 4 to 8 resource types. There may be exceptions with more complex business domains that require more resources, but you should first check if you can split them into separate subdomains with distinct APIs.
+        /collectors/{id}/config
+        
+    Here we have a one to one relationship between the collector and their config. In this case we do not need to pluralize. If the collector had more than one conifg, then we would need to pluralize like `/collectors/{id}/configs/{cid}`
 
-Nevertheless one API should hold all necessary resources to model complete business processes helping clients to understand these flows.
+    
 
-## **SHOULD NOT** use null or empty values for query parameter filtering
+
+  ## **MUST** use normalized paths without empty path segments and trailing slashes
+    Resources must not end with a slash
+
+    *Incorrect* : `api.airmiles.ca/collectors/1234/` 
+                  `api.airmiles.ca/collectors/1234//`
+                  `api.airmiles.ca/collectors///1234//`
+    
+    *Correct*   : `api.airmiles.ca/collectors/1234`
+
+
+  ## **MUST** use kebab-case for compound words in path segments
+    We use kabab casining (e.g. kebab-case) to make our URL's more readable. Although there are many ways of making URL's more readable, for example using camel casing (e.g. camelCase) and title casing (e.g. TitleCase), they have their drawbacks. In particular, although URL's in browsers are case insensitive, a number of caching mechanism's both at the CDN and hardware level are not. This makes using kebab case the easiest and most reliable way of insuring human readble URL's with consistency of experience for the user
+
+    *Incorrect* : `api.airmiles.ca/CollectorExperience/1234`
+                  `api.airmiles.ca/collectorExperience/1234` 
+      
+    *Correct*   : `api.airmiles.ca/collectors-experience/1234`  
+
+  ## **MUST** use snake_case for query parameters
+    We use snake case for query parameters. This helps avoid various techniologies that are case sensitive in the web ecosystem
+
+      *Example* : `api.airmiles.ca/collector/1234?order_id=1234` 
+  
+  ## **MUST** stick to conventional query parameters
+    If you provide query support for searching, sorting, filtering, and paginating, you must stick to the following naming conventions:
+
+    q: default query parameter, e.g. used by browser tab completion; should have an entity specific alias, e.g. sku.
+
+    sort: comma-separated list of fields (as defined by MUST define collection format of header and query parameters) to define the sort order. To indicate sorting direction, fields may be prefixed with + (ascending) or - (descending), e.g. /sales-orders?sort=+id.
+
+    offset: numeric offset of the first element provided on a page representing a collection request. 
+
+    limit: client suggested limit to restrict the number of entries on a page.
+
+    fields: field name expression to retrieve only a subset of fields of a resource. See `SHOULD support partial responses via filtering` below.
+
+
+  ## **SHOULD** limit number of resource types
+  As a general rule, having more than 3-4 resources levels is a good indication that the problem space is too large, and we are violating the single responsabiltiy principle. In these cases we should consider breaking down the problem domain into it's subsequent parts
+
+  A resource level is defined as any top level resource in the domain
+
+
+  *Example*   : `api.airmiles.ca/collectors/{id}`
+                `api.airmiles.ca/collectors/{id}}/orders/{oid}`
+                `api.airmiles.ca/collectors/segment`
+                `api.airmiles.ca/orders/{id}}`
+                
+
+  Here we have 3 resources. One for collector, one for collector orders, and one for orders. We do not consider the segment resource as a new resource because there is a one to one relation between collectors and segments.
+
+  Given this definition, our experience is that well defined APIs involve no more than 4 to 8 resource types. There may be exceptions with more complex business domains that require more resources, but you should first check if you can split them into separate subdomains with distinct APIs.
+
+  Nevertheless one API should hold all necessary resources to model complete business processes helping clients to understand these flows.
+
+  ## **SHOULD NOT** use null or empty values for query parameter filtering
   We should not use null values as input or state indicators. Instead we should either build up a domain specific language, or use a null object pattern to indicate the absense of a value.
 
   *Incorrect* : `api.airmiles.ca/collectors/{id}/segments?type=null`
@@ -369,7 +368,7 @@ Nevertheless one API should hold all necessary resources to model complete busin
 
 # Payloads
 --------------------
-These guidelines provides recommendations for defining JSON data at LoyatyOne. JSON here refers to [RFC 7159](https://tools.ietf.org/html/rfc7159) the "application/json" media type and custom JSON media types defined for APIs. The guidelines clarifies some specific cases to allow LoyatyOne JSON data to have an idiomatic form across teams and services.
+  These guidelines provides recommendations for defining JSON data at LoyatyOne. JSON here refers to [RFC 7159](https://tools.ietf.org/html/rfc7159) the "application/json" media type and custom JSON media types defined for APIs. The guidelines clarifies some specific cases to allow LoyatyOne JSON data to have an idiomatic form across teams and services.
 
   ## **MUST** support JSON as payload data interchange format
 
@@ -383,9 +382,9 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
 
   As a consequence, a JSON payload must
 
-   * [**MUST** support JSON in UTF-8](#must-support-json-in-utf-8)
-   * [**MUST** use JSON payloads conatianing only valid Unicode strings](#must-use-json-payloads-conatianing-only-valid-unicode-strings)
-   * [**MUST** use JSON payloads consisting of unique member names](#must-use-json-payloads-consisting-of-unique-member-names)
+  * [**MUST** support JSON in UTF-8](#must-support-json-in-utf-8)
+  * [**MUST** use JSON payloads conatianing only valid Unicode strings](#must-use-json-payloads-conatianing-only-valid-unicode-strings)
+  * [**MUST** use JSON payloads consisting of unique member names](#must-use-json-payloads-consisting-of-unique-member-names)
 
   
 
@@ -431,11 +430,11 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
 
   ## **MUST** design GET, HEAD, OPTIONS, TRACE to be safe
 
-   An operation is considered [safe](https://tools.ietf.org/html/rfc7231#section-4.2.1) if 
-   
+  An operation is considered [safe](https://tools.ietf.org/html/rfc7231#section-4.2.1) if 
+  
       "if their defined semantics are essentially read-only; i.e., the client does not request, and does not expect, any state change on the origin server as a result of applying a safe method to a target resource"
 
-   For example, a GET request should never have any side effect visible to the client like updating the the state of the resource. 
+  For example, a GET request should never have any side effect visible to the client like updating the the state of the resource. 
 
 
   ## **MUST** design GET, PUT, DELETE, HEAD and OPTIONS to be idempotent
@@ -550,7 +549,7 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
             required: true
             content:
 
-#  HTTP Status Codes
+# HTTP Status Codes
 --------------------
   ## **MUST** use official HTTP status codes 
 
@@ -565,9 +564,9 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
 
   ## **SHOULD** only use most common HTTP status codes
 
-   ### [Success codes](#success-codes)
+  ### [Success codes](#success-codes)
 
-   Code | Meaning | Methods
+  Code | Meaning | Methods
     -|-|-|
     [200](#status-code-200) | OK - this is the standard success response |  `<all>`
     [201](#status-code-201) | Created - Returned on successful entity creation. You are free to return either an empty response or the created resource in conjunction with the Location header. (More details found in the [\[standard-headers\]](#standard-headers).) _Always_ set the Location header. | [`POST`](#post), `PUT`
@@ -577,17 +576,17 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
 
 
 
-   ### [Redirection codes](#redirection-codes)
+  ### [Redirection codes](#redirection-codes)
 
-   Code | Meaning | Methods |
+  Code | Meaning | Methods |
     |-|-|-|
     [301](#status-code-301)| Moved Permanently - This and all future requests should be directed to the given URI.|`<all>`
     [303](#status-code-303)|See Other - The response to the request can be found under another URI using a `GET` method.|[`POST`](#post), `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
     [304](#status-code-304)|Not Modified - indicates that a conditional GET or HEAD request would have resulted in 200 response if it were not for the fact that the condition evaluated to false, i.e. resource has not been modified since the date or version passed via request headers If-Modified-Since or If-None-Match.|`GET`, [`HEAD`](#head)
 
-   ### [Client side error codes](#client-side-error-codes)
+  ### [Client side error codes](#client-side-error-codes)
 
-   Code | Meaning | Methods |
+  Code | Meaning | Methods |
     |-|-|-|
     [400](#status-code-400) |Bad request - unspecific client error indicating that the server cannot process the request due to something that is perceived to be a client error (e.g. malformed request syntax, invalid request). Should also be delivered in case of input payload fails business logic / semantic validation (instead of using status code 422).|`<all>`
     [401](#status-code-401) | Unauthorized - actually "Unauthenticated": credentials are not valid for the target resource. User must log in. | `<all>`
@@ -604,9 +603,9 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
     [428](#status-code-428) | Precondition Required - server requires the request to be conditional, e.g. to make sure that the "lost update problem" is avoided (see [**MAY** consider to support `Prefer` header to handle processing preferences](#181)).|`<all>`
     [429](#status-code-429) | Too many requests - the client does not consider rate limiting and sent too many requests (see [**MUST** use code 429 with headers for rate limits](#153)).| `<all>`
 
-   ### [Server side error codes:](#server-side-error-codes)
+  ### [Server side error codes:](#server-side-error-codes)
 
-   Code | Meaning | Methods
+  Code | Meaning | Methods
     |-|-|-|
     [500](#status-code-500)| Internal Server Error - a generic error indication for an unexpected server execution problem (here, client retry may be sensible)| `<all>`
     [501](#status-code-501)|Not Implemented - server cannot fulfill the request (usually implies future availability, e.g. new feature). | `<all>`
@@ -619,7 +618,7 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
 
     For example returning a 500 status error code for a resource not found (404) would be a violation of this rule
 
-   
+  
 # HTTP Headers
 --------------------
   ## **MUST** use kebab-case with uppercase separate words for HTTP headers
@@ -810,73 +809,73 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
 
 # Compatibility and Versioning
 --------------------
-## **MUST** not break backward compatibility 
+  ## **MUST** not break backward compatibility 
 
-Change APIs, but keep all consumers running. Consumers usually have independent release lifecycles, focus on stability, and avoid changes that do not provide additional value. APIs are contracts between service providers and service consumers that cannot be broken via unilateral decisions.
+  Change APIs, but keep all consumers running. Consumers usually have independent release lifecycles, focus on stability, and avoid changes that do not provide additional value. APIs are contracts between service providers and service consumers that cannot be broken via unilateral decisions.
 
-There are two techniques to change APIs without breaking them:
+  There are two techniques to change APIs without breaking them:
 
-*   follow rules for compatible extensions
+  *   follow rules for compatible extensions
+      
+  *   introduce new API versions and still support older versions with `deprecation`
+      
+
+  We strongly encourage using compatible API extensions and discourage versioning (see `**SHOULD** avoid versioning` and `**MUST** use media type versioning` below). The following guidelines for service providers (`**SHOULD** prefer compatible extensions`) and consumers (`**MUST** prepare clients to accept compatible API extensions`) enable us (having Postel’s Law in mind) to make compatible changes without versioning.
+
+  **Note:** There is a difference between incompatible and breaking changes. Incompatible changes are changes that are not covered by the compatibility rules below. Breaking changes are incompatible changes deployed into operation, and thereby breaking running API consumers. Usually, incompatible changes are breaking changes when deployed into operation. However, in specific controlled situations it is possible to deploy incompatible changes in a non-breaking way, if no API consumer is using the affected API aspects (see also `Deprecation` guidelines).
+
+
+  ## **MUST** not use URL versioning
+
+  With URL versioning a (major) version number is included in the path, e.g. `/v1/customers`. The consumer has to wait until the provider has been released and deployed. If the consumer also supports hypermedia links — even in their APIs — to drive workflows (HATEOAS), this quickly becomes complex. So does coordinating version upgrades — especially with hyperlinked service dependencies — when using URL versioning. To avoid this tighter coupling and complexer release management we do not use URL versioning
+
+  ## **MUST** prepare clients to accept compatible API extensions
+
+  Service clients should apply the robustness principle:
     
-*   introduce new API versions and still support older versions with `deprecation`
-    
+  *   Be tolerant in processing and reading data of API responses, more specifically service clients must be prepared for compatible API extensions of response data:
+      
+      *   Be tolerant with unknown fields in the payload (see also Fowler’s ["TolerantReader"](http://martinfowler.com/bliki/TolerantReader.html) post), i.e. ignore new fields but do not eliminate them from payload if needed for subsequent `PUT` requests.
+          
+      *   Be prepared that `Enum` return parameter may deliver new values; either be agnostic or provide default behavior for unknown values.
+          
+      *   Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions. Note also, that status codes are extensible. Default handling is how you would treat the corresponding `2xx` code (see [RFC 7231 Section 6](https://tools.ietf.org/html/rfc7231#section-6)).
+          
+      *   Follow the redirect when the server returns HTTP status code `301 (Moved Permanently)`.
 
-We strongly encourage using compatible API extensions and discourage versioning (see `**SHOULD** avoid versioning` and `**MUST** use media type versioning` below). The following guidelines for service providers (`**SHOULD** prefer compatible extensions`) and consumers (`**MUST** prepare clients to accept compatible API extensions`) enable us (having Postel’s Law in mind) to make compatible changes without versioning.
 
-**Note:** There is a difference between incompatible and breaking changes. Incompatible changes are changes that are not covered by the compatibility rules below. Breaking changes are incompatible changes deployed into operation, and thereby breaking running API consumers. Usually, incompatible changes are breaking changes when deployed into operation. However, in specific controlled situations it is possible to deploy incompatible changes in a non-breaking way, if no API consumer is using the affected API aspects (see also `Deprecation` guidelines).
+  ## **SHOULD** avoid versioning
 
+  When changing your RESTful APIs, do so in a compatible way and avoid generating additional API versions. Multiple versions can significantly complicate understanding, testing, maintaining, evolving, operating and releasing our systems ([supplementary reading](http://martinfowler.com/articles/enterpriseREST.html)).
 
-## **MUST** not use URL versioning
+  If changing an API can’t be done in a compatible way, then proceed in one of these three ways:
 
-With URL versioning a (major) version number is included in the path, e.g. `/v1/customers`. The consumer has to wait until the provider has been released and deployed. If the consumer also supports hypermedia links — even in their APIs — to drive workflows (HATEOAS), this quickly becomes complex. So does coordinating version upgrades — especially with hyperlinked service dependencies — when using URL versioning. To avoid this tighter coupling and complexer release management we do not use URL versioning
+  *   create a new resource (variant) in addition to the old resource variant
+      
+  *   create a new service endpoint — i.e. a new application with a new API (with a new domain name)
+      
+  *   create a new API version supported in parallel with the old API by the same microservice
+      
+  As we discourage versioning by all means because of the manifold disadvantages, we strongly recommend to only use the first two approaches.
 
-## **MUST** prepare clients to accept compatible API extensions
+  ## **SHOULD** prefer compatible extensions
 
-Service clients should apply the robustness principle:
-   
-*   Be tolerant in processing and reading data of API responses, more specifically service clients must be prepared for compatible API extensions of response data:
-    
-    *   Be tolerant with unknown fields in the payload (see also Fowler’s ["TolerantReader"](http://martinfowler.com/bliki/TolerantReader.html) post), i.e. ignore new fields but do not eliminate them from payload if needed for subsequent `PUT` requests.
+    API designers should apply the following rules to evolve RESTful APIs for services in a backward-compatible way:
+
+    * Add only optional, never mandatory fields.
         
-    *   Be prepared that `Enum` return parameter may deliver new values; either be agnostic or provide default behavior for unknown values.
+    * Never change the semantic of fields (e.g. changing the semantic from collector-number to collector-id, as both are different unique customer keys)
         
-    *   Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions. Note also, that status codes are extensible. Default handling is how you would treat the corresponding `2xx` code (see [RFC 7231 Section 6](https://tools.ietf.org/html/rfc7231#section-6)).
+    * Input fields may have (complex) constraints being validated via server-side business logic. Never change the validation logic to be more restrictive and make sure that all constraints are clearly defined in description.
         
-    *   Follow the redirect when the server returns HTTP status code `301 (Moved Permanently)`.
+    * Enum ranges can be reduced when used as input parameters, only if the server is ready to accept and handle old range values too. 
+        
+    * Enum ranges cannot be extended when used for output parameters — clients may not be prepared to handle it. However, enum ranges can be extended when used for input parameters.
+        
+    * Support redirection in case an URL has to change `301 (Moved Permanently)`.
 
 
-## **SHOULD** avoid versioning
-
-When changing your RESTful APIs, do so in a compatible way and avoid generating additional API versions. Multiple versions can significantly complicate understanding, testing, maintaining, evolving, operating and releasing our systems ([supplementary reading](http://martinfowler.com/articles/enterpriseREST.html)).
-
-If changing an API can’t be done in a compatible way, then proceed in one of these three ways:
-
-*   create a new resource (variant) in addition to the old resource variant
-    
-*   create a new service endpoint — i.e. a new application with a new API (with a new domain name)
-    
-*   create a new API version supported in parallel with the old API by the same microservice
-    
-As we discourage versioning by all means because of the manifold disadvantages, we strongly recommend to only use the first two approaches.
-
-## **SHOULD** prefer compatible extensions
-
-  API designers should apply the following rules to evolve RESTful APIs for services in a backward-compatible way:
-
-  * Add only optional, never mandatory fields.
-      
-  * Never change the semantic of fields (e.g. changing the semantic from collector-number to collector-id, as both are different unique customer keys)
-      
-  * Input fields may have (complex) constraints being validated via server-side business logic. Never change the validation logic to be more restrictive and make sure that all constraints are clearly defined in description.
-      
-  * Enum ranges can be reduced when used as input parameters, only if the server is ready to accept and handle old range values too. 
-      
-  * Enum ranges cannot be extended when used for output parameters — clients may not be prepared to handle it. However, enum ranges can be extended when used for input parameters.
-      
-  * Support redirection in case an URL has to change `301 (Moved Permanently)`.
-
-
-## **SHOULD** design APIs conservatively
+  ## **SHOULD** design APIs conservatively
 
 Designers of service provider APIs should be conservative and accurate in what they accept from clients:
 
@@ -903,80 +902,80 @@ In specific situations, where a (known) input field is not needed anymore, it ei
 # Data formats
 -----------------------------------------------
 
-## **SHOULD** use standard data formats 
+  ## **SHOULD** use standard data formats 
 
-[Open API](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md#data-types) (based on [JSON Schema Validation vocabulary](https://tools.ietf.org/html/draft-bhutton-json-schema-validation-00#section-7.3)) defines formats from ISO and IETF standards for date/time, integers/numbers and binary data. You **must** use these formats, whenever applicable:
+  [Open API](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md#data-types) (based on [JSON Schema Validation vocabulary](https://tools.ietf.org/html/draft-bhutton-json-schema-validation-00#section-7.3)) defines formats from ISO and IETF standards for date/time, integers/numbers and binary data. You **must** use these formats, whenever applicable:
 
-   
-
-`OpenAPI type` | `OpenAPI format` |  Specification | Example |
--|-|-|-|
-`integer` | `int32` | 4 byte signed integer between -231 and 231\-1 | `7721071004`
-`integer` | `int64` | 8 byte signed integer between -263 and 263\-1 | `772107100456824`
-`integer` | `bigint` | arbitrarily large signed integer number |  `77210710045682438959`
-`number` |  `float` | `binary32` single precision decimal number — see [IEEE 754-2008/ISO 60559:2011](https://en.wikipedia.org/wiki/IEEE_754) | `3.1415927`
-`number` | `double` |`binary64` double precision decimal number — see [IEEE 754-2008/ISO 60559:2011](https://en.wikipedia.org/wiki/IEEE_754) | `3.141592653589793`
-`number` |  `decimal` | arbitrarily precise signed decimal number | `3.141592653589793238462643383279`
-`string` | `byte` | `base64url` encoded byte following [RFC 7493 Section 4.4](https://tools.ietf.org/html/rfc7493#section-4.4) | `"VA=="`
-`string` | `binary` | `base64url` encoded byte sequence following [RFC 7493 Section 4.4](https://tools.ietf.org/html/rfc7493#section-4.4) | `"VGVzdA=="`
-`string` | `date` | [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile — subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601) | `"2019-07-30"`
-`string` | `date-time` | [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile — subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601) | `"2019-07-30T06:43:40.252Z"`
-`string` | `time` | [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile — subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601) | `"06:43:40.252Z"`
-`string` |  `duration` | [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile — subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601) | `"P1DT30H4S"`
-`string` | `period` | [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile — subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601) | `"2019-07-30T06:43:40.252Z/PT3H"`
-`string` | `password` |  | `"secret"` 
-`string` | `email` | [RFC 5322](https://tools.ietf.org/html/rfc5322) | `"[example@loyaltyone.de](mailto:example@loyaltyone.de)"`
-`string` | `idn-email` | [RFC 6531](https://tools.ietf.org/html/rfc6531)| `"hello@bücher.example"`
-`string` | `hostname` | [RFC 1034](https://tools.ietf.org/html/rfc1034) | `"www.loyaltyone.de"`
-`string`| `idn-hostname`| [RFC 5890](https://tools.ietf.org/html/rfc5890)|`"bücher.example"`
-`string` | `ipv4`| [RFC 2673](https://tools.ietf.org/html/rfc2673) | `"104.75.173.179"`
-`string` | `ipv6` | [RFC 2673](https://tools.ietf.org/html/rfc2673) | `"2600:1401:2::8a"`
-`string` | `uri` | [RFC 3986](https://tools.ietf.org/html/rfc3986) | `"https://www.loyaltyone.de/"`
-`string` | `uri-reference` | [RFC 3986](https://tools.ietf.org/html/rfc3986) | `"/clothing/"`
-`string` | `uri-template` | [RFC 6570](https://tools.ietf.org/html/rfc6570)| `"/users/{id}"`
-`string` | `iri` | [RFC 3987](https://tools.ietf.org/html/rfc3987) | `"https://bücher.example/"`
-`string` | `iri-reference`| [RFC 3987](https://tools.ietf.org/html/rfc3987) | `"/damenbekleidung-jacken-mäntel/"`
-`string` | [`uuid`](#144) | [RFC 4122](https://tools.ietf.org/html/rfc4122) | `"e2ab873e-b295-11e9-9c02-…​"`
-`string` | `json-pointer` | [RFC 6901](https://tools.ietf.org/html/rfc6901) | `"/items/0/id"`
-`string` | `relative-json-pointer` | [Relative JSON pointers](https://tools.ietf.org/html/draft-handrews-relative-json-pointer) | `"1/id"`
-
-
-We add further OpenAPI formats based other ISO and IETF standards. You **must** use these formats, whenever applicable:
-
-`OpenAPI type` | `format` | Specification | Example
-|-|-|-|-|
-`string`| `iso-639` | two letter language code — see [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)|`"en"`
-`string` | `bcp47` | multi letter language tag — see [BCP 47](https://tools.ietf.org/html/bcp47). It is a compatible extension of [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) optionally with additional information for language usage, like region, variant, script. | `"en-DE"`
-`string` | `iso-3166` | two letter country code — see [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) | `"GB"` 
-`string` | `iso-4217` | three letter currency code — see [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) | `"EUR"` 
-`string` | `gtin-13` | Global Trade Item Number — see [GTIN](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) | `"5710798389878"`
-`string` | `regex` | regular expressions as defined in [ECMA 262](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf) | `"^[a-z0-9]+$"`
-
-**Remark:** Please note that this list of standard data formats is not exhaustive and everyone is encouraged to propose additions.
-
-## **MUST** use standard formats for date and time properties 
-
-As a specific case of `**SHOULD** use standard data formats`, you must use the `string` typed formats `date`, `date-time`, `time`, `duration`, or `period` for the definition of date and time properties. The formats are based on the standard [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile -- a subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601)
-
-**Exception:** For passing date/time information via standard protocol headers, HTTP [RFC 7231](https://tools.ietf.org/html/rfc7231#section-7.1.1.1) requires to follow the date and time specification used by the Internet Message Format [RFC 5322](https://tools.ietf.org/html/rfc5322).
-
-As defined by the standard, time zone offset may be used, however, we recommend to only use times based on UTC without local offsets. For example `2015-05-28T14:07:17Z` rather than `2015-05-28T14:07:17+00:00`. From experience we have learned that zone offsets are not easy to understand and often not correctly handled. Note also that zone offsets are different from local times which may include daylight saving time. When it comes to storage, all dates should be consistently stored in UTC without a zone offset. Localization should be done locally by the services that provide user interfaces, if required.
-
-
-## **MUST** use standard formats for country, language and currency properties 
-
-As a specific case of `**MUST** use standard data formats` you must use the following standard formats:
-
-*   Country codes: [ISO 3166-1-alpha2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) two letter country codes indicated via OpenAPI format `iso-3166`
-    
-*   Language codes: [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) two letter language codes indicated via OpenAPI format `iso-639`
-    
-*   Language variant tags: [BCP 47](https://tools.ietf.org/html/bcp47) multi letter language tag indicated via OpenAPI format `bcp47`. (It is a compatible extension of [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) with additional optional information for language usage, like region, variant, script)
-    
-*   Currency codes: [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) three letter currency codes indicated via OpenAPI format `iso-4217`
     
 
-## **SHOULD** use content negotiation, if clients may choose from different resource representations
+  `OpenAPI type` | `OpenAPI format` |  Specification | Example |
+  -|-|-|-|
+  `integer` | `int32` | 4 byte signed integer between -231 and 231\-1 | `7721071004`
+  `integer` | `int64` | 8 byte signed integer between -263 and 263\-1 | `772107100456824`
+  `integer` | `bigint` | arbitrarily large signed integer number |  `77210710045682438959`
+  `number` |  `float` | `binary32` single precision decimal number — see [IEEE 754-2008/ISO 60559:2011](https://en.wikipedia.org/wiki/IEEE_754) | `3.1415927`
+  `number` | `double` |`binary64` double precision decimal number — see [IEEE 754-2008/ISO 60559:2011](https://en.wikipedia.org/wiki/IEEE_754) | `3.141592653589793`
+  `number` |  `decimal` | arbitrarily precise signed decimal number | `3.141592653589793238462643383279`
+  `string` | `byte` | `base64url` encoded byte following [RFC 7493 Section 4.4](https://tools.ietf.org/html/rfc7493#section-4.4) | `"VA=="`
+  `string` | `binary` | `base64url` encoded byte sequence following [RFC 7493 Section 4.4](https://tools.ietf.org/html/rfc7493#section-4.4) | `"VGVzdA=="`
+  `string` | `date` | [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile — subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601) | `"2019-07-30"`
+  `string` | `date-time` | [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile — subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601) | `"2019-07-30T06:43:40.252Z"`
+  `string` | `time` | [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile — subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601) | `"06:43:40.252Z"`
+  `string` |  `duration` | [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile — subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601) | `"P1DT30H4S"`
+  `string` | `period` | [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile — subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601) | `"2019-07-30T06:43:40.252Z/PT3H"`
+  `string` | `password` |  | `"secret"` 
+  `string` | `email` | [RFC 5322](https://tools.ietf.org/html/rfc5322) | `"[example@loyaltyone.de](mailto:example@loyaltyone.de)"`
+  `string` | `idn-email` | [RFC 6531](https://tools.ietf.org/html/rfc6531)| `"hello@bücher.example"`
+  `string` | `hostname` | [RFC 1034](https://tools.ietf.org/html/rfc1034) | `"www.loyaltyone.de"`
+  `string`| `idn-hostname`| [RFC 5890](https://tools.ietf.org/html/rfc5890)|`"bücher.example"`
+  `string` | `ipv4`| [RFC 2673](https://tools.ietf.org/html/rfc2673) | `"104.75.173.179"`
+  `string` | `ipv6` | [RFC 2673](https://tools.ietf.org/html/rfc2673) | `"2600:1401:2::8a"`
+  `string` | `uri` | [RFC 3986](https://tools.ietf.org/html/rfc3986) | `"https://www.loyaltyone.de/"`
+  `string` | `uri-reference` | [RFC 3986](https://tools.ietf.org/html/rfc3986) | `"/clothing/"`
+  `string` | `uri-template` | [RFC 6570](https://tools.ietf.org/html/rfc6570)| `"/users/{id}"`
+  `string` | `iri` | [RFC 3987](https://tools.ietf.org/html/rfc3987) | `"https://bücher.example/"`
+  `string` | `iri-reference`| [RFC 3987](https://tools.ietf.org/html/rfc3987) | `"/damenbekleidung-jacken-mäntel/"`
+  `string` | [`uuid`](#144) | [RFC 4122](https://tools.ietf.org/html/rfc4122) | `"e2ab873e-b295-11e9-9c02-…​"`
+  `string` | `json-pointer` | [RFC 6901](https://tools.ietf.org/html/rfc6901) | `"/items/0/id"`
+  `string` | `relative-json-pointer` | [Relative JSON pointers](https://tools.ietf.org/html/draft-handrews-relative-json-pointer) | `"1/id"`
+
+
+  We add further OpenAPI formats based other ISO and IETF standards. You **must** use these formats, whenever applicable:
+
+  `OpenAPI type` | `format` | Specification | Example
+  |-|-|-|-|
+  `string`| `iso-639` | two letter language code — see [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)|`"en"`
+  `string` | `bcp47` | multi letter language tag — see [BCP 47](https://tools.ietf.org/html/bcp47). It is a compatible extension of [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) optionally with additional information for language usage, like region, variant, script. | `"en-DE"`
+  `string` | `iso-3166` | two letter country code — see [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) | `"GB"` 
+  `string` | `iso-4217` | three letter currency code — see [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) | `"EUR"` 
+  `string` | `gtin-13` | Global Trade Item Number — see [GTIN](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) | `"5710798389878"`
+  `string` | `regex` | regular expressions as defined in [ECMA 262](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf) | `"^[a-z0-9]+$"`
+
+  **Remark:** Please note that this list of standard data formats is not exhaustive and everyone is encouraged to propose additions.
+
+  ## **MUST** use standard formats for date and time properties 
+
+  As a specific case of `**SHOULD** use standard data formats`, you must use the `string` typed formats `date`, `date-time`, `time`, `duration`, or `period` for the definition of date and time properties. The formats are based on the standard [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile -- a subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601)
+
+  **Exception:** For passing date/time information via standard protocol headers, HTTP [RFC 7231](https://tools.ietf.org/html/rfc7231#section-7.1.1.1) requires to follow the date and time specification used by the Internet Message Format [RFC 5322](https://tools.ietf.org/html/rfc5322).
+
+  As defined by the standard, time zone offset may be used, however, we recommend to only use times based on UTC without local offsets. For example `2015-05-28T14:07:17Z` rather than `2015-05-28T14:07:17+00:00`. From experience we have learned that zone offsets are not easy to understand and often not correctly handled. Note also that zone offsets are different from local times which may include daylight saving time. When it comes to storage, all dates should be consistently stored in UTC without a zone offset. Localization should be done locally by the services that provide user interfaces, if required.
+
+
+  ## **MUST** use standard formats for country, language and currency properties 
+
+  As a specific case of `**MUST** use standard data formats` you must use the following standard formats:
+
+  *   Country codes: [ISO 3166-1-alpha2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) two letter country codes indicated via OpenAPI format `iso-3166`
+      
+  *   Language codes: [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) two letter language codes indicated via OpenAPI format `iso-639`
+      
+  *   Language variant tags: [BCP 47](https://tools.ietf.org/html/bcp47) multi letter language tag indicated via OpenAPI format `bcp47`. (It is a compatible extension of [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) with additional optional information for language usage, like region, variant, script)
+      
+  *   Currency codes: [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) three letter currency codes indicated via OpenAPI format `iso-4217`
+      
+
+  ## **SHOULD** use content negotiation, if clients may choose from different resource representations
 
 In some situations the API supports serving different representations of a specific resource (at the same URL) e.g. JSON, PDF, TEXT, or HTML representations for an invoice resource. You should use [content negotiation](https://en.wikipedia.org/wiki/Content_negotiation) to support clients specifying via the standard HTTP headers [`Accept`](https://tools.ietf.org/html/rfc7231#section-5.3.2), [`Accept-Language`](https://tools.ietf.org/html/rfc7231#section-5.3.5), [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) which representation is best suited for their use case, for example, which language of a document, representation / content format, or content encoding. You [**SHOULD** use standard media types](#172) like `application/json` or `application/pdf` for defining the content format in the [`Accept`](https://tools.ietf.org/html/rfc7231#section-5.3.2) header.
 
