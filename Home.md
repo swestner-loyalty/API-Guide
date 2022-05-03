@@ -217,12 +217,11 @@ On the other hand, API First obviously is in conflict with the bad practice of p
 
   You must follow the [API First Principle](#api-first), more specifically:
 
-  *   You must define APIs first, before coding its implementation, [using OpenAPI as specification language](#101)
+  *   You must define APIs first, before coding its implementation, using OpenAPI as specification language](#must-provide-api-specification-using-openapi)
       
   *   You must design your APIs consistently with these guidelines; 
       
   *   You must call for early review feedback from peers and client developers for all component external facing APIs
-
 
 
   ## **MUST** provide API specification using OpenAPI
@@ -258,74 +257,71 @@ All APIs must be written in U.S. English to keep the language and spelling consi
 # URLs
 --------------------
   ## **MUST** keep URLs verb-free
-    Verbs must not appear in URL's. REST URL's define resources, not actions. Instead actions are indicated as part of the HTTP method. 
+  Verbs must not appear in URL's. REST URL's define resources, not actions. Instead actions are indicated as part of the HTTP method. 
 
-    *Incorrect* : `GET api.airmiles.ca/collectors/search`                       
-      
-    *Correct*   : `GET api.airmiles.ca/collectors/searches`
+  *Incorrect* : `GET api.airmiles.ca/collectors/search`                       
+    
+  *Correct*   : `GET api.airmiles.ca/collectors/searches`
 
   ## **MUST NOT** pass sensitive information in the URL
     
-    We must not pass data the could be considered sensitive (e.g. Personal Information (PI) like credit card numbers, user name etc) in the URLS since it will be exposed to various caching and logging technologies (browser cache, CDN, Splunk etc). 
+  We must not pass data the could be considered sensitive (e.g. Personal Information (PI) like credit card numbers, user name etc) in the URLS since it will be exposed to various caching and logging technologies (browser cache, CDN, Splunk etc). 
 
-    ***see overloaded POST for solutions
+  ***see overloaded POST for solutions
 
 
   ## **MUST** pluralize resource names that are collections
-    The majority of resources available in a RESTful API are collections. These should be pluralized to indicate they are access points to many resources
+  The majority of resources available in a RESTful API are collections. These should be pluralized to indicate they are access points to many resources
 
-    Example : 
+  Example : 
 
-      Incorrect : /collector/{id}
-      Correct   : /collectors/{id}
+    Incorrect : /collector/{id}
+    Correct   : /collectors/{id}
 
 
-    In cases where the resource is a singular entity, the pluralization may be dropped.
+  In cases where the resource is a singular entity, the pluralization may be dropped.
 
-    Example : 
+  Example : 
 
-        /collectors/{id}/config
-        
-    Here we have a one to one relationship between the collector and their config. In this case we do not need to pluralize. If the collector had more than one conifg, then we would need to pluralize like `/collectors/{id}/configs/{cid}`
-
+      /collectors/{id}/config
+      
+  Here we have a one to one relationship between the collector and their config. In this case we do not need to pluralize. If the collector had more than one conifg, then we would need to pluralize like `/collectors/{id}/configs/{cid}`
     
-
-
   ## **MUST** use normalized paths without empty path segments and trailing slashes
-    Resources must not end with a slash
+  Resources must not end with a slash
 
-    *Incorrect* : `api.airmiles.ca/collectors/1234/` 
-                  `api.airmiles.ca/collectors/1234//`
-                  `api.airmiles.ca/collectors///1234//`
-    
-    *Correct*   : `api.airmiles.ca/collectors/1234`
+  *Incorrect* : `api.airmiles.ca/collectors/1234/` 
+                `api.airmiles.ca/collectors/1234//`
+                `api.airmiles.ca/collectors///1234//`
+  
+  *Correct*   : `api.airmiles.ca/collectors/1234`
 
 
   ## **MUST** use kebab-case for compound words in path segments
-    We use kabab casining (e.g. kebab-case) to make our URL's more readable. Although there are many ways of making URL's more readable, for example using camel casing (e.g. camelCase) and title casing (e.g. TitleCase), they have their drawbacks. In particular, although URL's in browsers are case insensitive, a number of caching mechanism's both at the CDN and hardware level are not. This makes using kebab case the easiest and most reliable way of insuring human readble URL's with consistency of experience for the user
+  We use kabab casining (e.g. kebab-case) to make our URL's more readable. Although there are many ways of making URL's more readable, for example using camel casing (e.g. camelCase) and title casing (e.g. TitleCase), they have their drawbacks. In particular, although URL's in browsers are case insensitive, a number of caching mechanism's both at the CDN and hardware level are not. This makes using kebab case the easiest and most reliable way of insuring human readble URL's with consistency of experience for the user
 
-    *Incorrect* : `api.airmiles.ca/CollectorExperience/1234`
-                  `api.airmiles.ca/collectorExperience/1234` 
-      
-    *Correct*   : `api.airmiles.ca/collectors-experience/1234`  
+  *Incorrect* : `api.airmiles.ca/CollectorExperience/1234`
+                `api.airmiles.ca/collectorExperience/1234` 
+    
+  *Correct*   : `api.airmiles.ca/collectors-experience/1234`  
 
   ## **MUST** use snake_case for query parameters
-    We use snake case for query parameters. This helps avoid various techniologies that are case sensitive in the web ecosystem
+  We use snake case for query parameters. This helps avoid various techniologies that are case sensitive in the web ecosystem
 
-      *Example* : `api.airmiles.ca/collector/1234?order_id=1234` 
+    *Example* : `api.airmiles.ca/collector/1234?order_id=1234` 
   
   ## **MUST** stick to conventional query parameters
-    If you provide query support for searching, sorting, filtering, and paginating, you must stick to the following naming conventions:
+  If you provide query support for searching, sorting, filtering, and paginating, you must stick to the following naming conventions:
 
-    q: default query parameter, e.g. used by browser tab completion; should have an entity specific alias, e.g. sku.
+  q: default query parameter, e.g. used by browser tab completion; should have an entity specific alias, e.g. sku.
 
-    sort: comma-separated list of fields (as defined by MUST define collection format of header and query parameters) to define the sort order. To indicate sorting direction, fields may be prefixed with + (ascending) or - (descending), e.g. /sales-orders?sort=+id.
+  sort: comma-separated list of fields (as defined by MUST define collection format of header and query parameters) to define the sort order. To indicate sorting direction, fields may be prefixed with + (ascending) or - (descending), e.g. /sales-orders?sort=+id.
 
-    offset: numeric offset of the first element provided on a page representing a collection request. 
+  offset: numeric offset of the first element provided on a page representing a collection request. 
 
-    limit: client suggested limit to restrict the number of entries on a page.
+  limit: client suggested limit to restrict the number of entries on a page.
 
-    fields: field name expression to retrieve only a subset of fields of a resource. See `SHOULD support partial responses via filtering` below.
+  fields: field name expression to retrieve only a subset of fields of a resource. See `SHOULD support partial responses via filtering` below.
 
 
   ## **SHOULD** limit number of resource types
