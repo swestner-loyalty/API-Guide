@@ -438,7 +438,7 @@ All APIs must be written in U.S. English to keep the language and spelling consi
 
   An operation is considered [safe](https://tools.ietf.org/html/rfc7231#section-4.2.1) if 
   
-      "if their defined semantics are essentially read-only; i.e., the client does not request, and does not expect, any state change on the origin server as a result of applying a safe method to a target resource"
+  > "if their defined semantics are essentially read-only; i.e., the client does not request, and does not expect, any state change on the origin server as a result of applying a safe method to a target resource"
 
   For example, a GET request should never have any side effect visible to the client like updating the the state of the resource. 
 
