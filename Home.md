@@ -1,31 +1,28 @@
 # AMRP API Platform Design Standards
 
 - [AMRP API Platform Design Standards](#amrp-api-platform-design-standards)
-- [Introduction](#introduction)
-- [Principles](#principles)
+  - [# Introduction](#-introduction)
+  - [Document Semantics, Formatting, and Naming](#document-semantics-formatting-and-naming)
+  - [# Principles](#-principles)
     - [API design principles](#api-design-principles)
     - [API as a product](#api-as-a-product)
     - [API first](#api-first)
 - [General Guidelines](#general-guidelines)
-  - [Document Semantics, Formatting, and Naming](#document-semantics-formatting-and-naming)
   - [**MUST** design the API first](#must-design-the-api-first)
   - [**MUST** provide API specification using OpenAPI](#must-provide-api-specification-using-openapi)
   - [**SHOULD** provide API user manual](#should-provide-api-user-manual)
   - [**MUST** write APIs using U.S. English](#must-write-apis-using-us-english)
-- [URLs](#urls)
-  - [**MUST** pluralize resource names that are collections](#must-pluralize-resource-names-that-are-collections)
-  - [**MUST** use kebab-case for compound words in path segments](#must-use-kebab-case-for-compound-words-in-path-segments)
-  - [**MUST** use normalized paths without empty path segments and trailing slashes](#must-use-normalized-paths-without-empty-path-segments-and-trailing-slashes)
+  - [# URLs](#-urls)
   - [**MUST** keep URLs verb-free](#must-keep-urls-verb-free)
-  - [**MUST** identify resources and sub-resources via path segments](#must-identify-resources-and-sub-resources-via-path-segments)
-  - [**MAY** consider using nested URLs for dependant resources](#may-consider-using-nested-urls-for-dependant-resources)
-  - [**SHOULD** limit number of resource types](#should-limit-number-of-resource-types)
-  - [**SHOULD** limit number of sub-resource levels](#should-limit-number-of-sub-resource-levels)
+  - [**MUST NOT** pass sensitive information in the URL](#must-not-pass-sensitive-information-in-the-url)
+  - [**MUST** pluralize resource names that are collections](#must-pluralize-resource-names-that-are-collections)
+  - [**MUST** use normalized paths without empty path segments and trailing slashes](#must-use-normalized-paths-without-empty-path-segments-and-trailing-slashes)
+  - [**MUST** use kebab-case for compound words in path segments](#must-use-kebab-case-for-compound-words-in-path-segments)
   - [**MUST** use snake_case for query parameters](#must-use-snake_case-for-query-parameters)
   - [**MUST** stick to conventional query parameters](#must-stick-to-conventional-query-parameters)
-  - [**MUST NOT** pass sensitive information in the URL](#must-not-pass-sensitive-information-in-the-url)
-  - [**SHOULD NOT** use null for query parameters](#should-not-use-null-for-query-parameters)
-- [Security](#security)
+  - [**SHOULD** limit number of resource types](#should-limit-number-of-resource-types)
+  - [**SHOULD NOT** use null or empty values for query parameter filtering](#should-not-use-null-or-empty-values-for-query-parameter-filtering)
+  - [# Security](#-security)
   - [**MUST** secure endpoints](#must-secure-endpoints)
   - [**MUST** not expose stack traces](#must-not-expose-stack-traces)
   - [# Payloads](#-payloads)
@@ -33,17 +30,17 @@
   - [**MUST** support JSON in UTF-8](#must-support-json-in-utf-8)
   - [**MUST** use JSON payloads conatianing only valid Unicode strings](#must-use-json-payloads-conatianing-only-valid-unicode-strings)
   - [**MUST** use JSON payloads consisting of unique member names](#must-use-json-payloads-consisting-of-unique-member-names)
-  - [**MAY** pass non-JSON media types using data specific standard formats](#may-pass-non-json-media-types-using-data-specific-standard-formats)
   - [**SHOULD** not use null for empty arrays](#should-not-use-null-for-empty-arrays)
+  - [**MAY** pass non-JSON media types using data specific standard formats](#may-pass-non-json-media-types-using-data-specific-standard-formats)
   - [# HTTP Requests](#-http-requests)
   - [**MUST** use HTTP methods correctly](#must-use-http-methods-correctly)
-  - [**MAY** use overloaded POST](#may-use-overloaded-post)
   - [**MUST** design GET, HEAD, OPTIONS, TRACE to be safe](#must-design-get-head-options-trace-to-be-safe)
   - [**MUST** design GET, PUT, DELETE, HEAD and OPTIONS to be idempotent](#must-design-get-put-delete-head-and-options-to-be-idempotent)
   - [**SHOULD** design POST, DELETE and PATCH idempotent](#should-design-post-delete-and-patch-idempotent)
   - [**SHOULD** design simple query languages using query parameters](#should-design-simple-query-languages-using-query-parameters)
   - [**SHOULD** design complex query languages using JSON](#should-design-complex-query-languages-using-json)
-- [HTTP Status Codes](#http-status-codes)
+  - [**MAY** use overloaded POST](#may-use-overloaded-post)
+  - [#  HTTP Status Codes](#--http-status-codes)
   - [**MUST** use official HTTP status codes](#must-use-official-http-status-codes)
   - [**SHOULD** only use most common HTTP status codes](#should-only-use-most-common-http-status-codes)
     - [Success codes](#success-codes)
@@ -51,41 +48,39 @@
     - [Client side error codes](#client-side-error-codes)
     - [Server side error codes:](#server-side-error-codes)
   - [**MUST** use most specific HTTP status codes](#must-use-most-specific-http-status-codes)
-- [HTTP Headers](#http-headers)
-  - [**MAY** use standard headers](#may-use-standard-headers)
-  - [**SHOULD** use kebab-case with uppercase separate words for HTTP headers](#should-use-kebab-case-with-uppercase-separate-words-for-http-headers)
-  - [**MAY** consider to support Idempotency-Key header](#may-consider-to-support-idempotency-key-header)
-  - [**SHOULD** use only the specified proprietary AMRP headers (provide list)](#should-use-only-the-specified-proprietary-amrp-headers-provide-list)
+  - [# HTTP Headers](#-http-headers)
+  - [**MUST** use kebab-case with uppercase separate words for HTTP headers](#must-use-kebab-case-with-uppercase-separate-words-for-http-headers)
   - [**MUST** propagate proprietary headers](#must-propagate-proprietary-headers)
-- [REST Compliance Levels](#rest-compliance-levels)
+  - [**SHOULD** use only the specified proprietary AMRP headers (provide list)](#should-use-only-the-specified-proprietary-amrp-headers-provide-list)
+  - [**MAY** use standard headers](#may-use-standard-headers)
+  - [**MAY** consider to support Idempotency-Key header](#may-consider-to-support-idempotency-key-header)
+  - [# REST Compliance Levels](#-rest-compliance-levels)
   - [**MUST** use REST maturity level 2](#must-use-rest-maturity-level-2)
   - [**MAY** use REST maturity level 3 - HATEOAS](#may-use-rest-maturity-level-3---hateoas)
-- [Performance](#performance)
+  - [# Performance](#-performance)
   - [**SHOULD** reduce bandwidth needs and improve responsiveness](#should-reduce-bandwidth-needs-and-improve-responsiveness)
   - [**SHOULD** use gzip compression](#should-use-gzip-compression)
   - [**SHOULD** support partial responses via filtering](#should-support-partial-responses-via-filtering)
-  - [**SHOULD** support partial responses via filtering](#should-support-partial-responses-via-filtering-1)
     - [Unfiltered](#unfiltered)
     - [Filtered](#filtered)
-- [Compatibility and Versioning](#compatibility-and-versioning)
+  - [# Compatibility and Versioning](#-compatibility-and-versioning)
   - [**MUST** not break backward compatibility](#must-not-break-backward-compatibility)
+  - [**MUST** not use URL versioning](#must-not-use-url-versioning)
+  - [**MUST** prepare clients to accept compatible API extensions](#must-prepare-clients-to-accept-compatible-api-extensions)
+  - [**SHOULD** avoid versioning](#should-avoid-versioning)
   - [**SHOULD** prefer compatible extensions](#should-prefer-compatible-extensions)
   - [**SHOULD** design APIs conservatively](#should-design-apis-conservatively)
-  - [**MUST** prepare clients to accept compatible API extensions](#must-prepare-clients-to-accept-compatible-api-extensions)
-  - [**MUST** treat OpenAPI specification as open for extension by default](#must-treat-openapi-specification-as-open-for-extension-by-default)
-  - [**SHOULD** avoid versioning](#should-avoid-versioning)
-  - [[**MUST** not use URL versioning](#must-not-use-url-versioning)
   - [# Data formats](#-data-formats)
-    - [[**SHOULD** use standard data formats \[238\]](#238)](#should-use-standard-data-formats-238)
-  - [[**MUST** use standard formats for date and time properties \[169\]](#169)](#must-use-standard-formats-for-date-and-time-properties-169)
-  - [[**MUST** use standard formats for country, language and currency properties \[170\]](#170)](#must-use-standard-formats-for-country-language-and-currency-properties-170)
+  - [**SHOULD** use standard data formats](#should-use-standard-data-formats)
+  - [**MUST** use standard formats for date and time properties](#must-use-standard-formats-for-date-and-time-properties)
+  - [**MUST** use standard formats for country, language and currency properties](#must-use-standard-formats-for-country-language-and-currency-properties)
   - [**SHOULD** use content negotiation, if clients may choose from different resource representations](#should-use-content-negotiation-if-clients-may-choose-from-different-resource-representations)
-- [References](#references)
+- [Accredidation](#accredidation)
 
     
 
 # [Introduction](#introduction)
-
+--------------------
 The purpose of this document is to ensure consistency and the standard application of practices when designing and implementing API's at AMRP. It details the requirements, conventions and best practices on how to create an API that is maintainable, extensible, discoverable and consistent. This facilitates a great developer experience and the ability to quickly compose business value.
 
 Airmiles software architecture centers around decoupled microservices that provide functionality via RESTful APIs with a JSON payload. Small engineering teams own, deploy and operate these microservices in into AWS. Our APIs most purely express what our systems do, and are therefore highly valuable business assets. Designing high-quality, long-lasting APIs is an integral part of our business strategy that emphasizes developing lots of public APIs for our external business partners to use and build value around.
@@ -109,15 +104,30 @@ Ideally, all Airmiles APIs will look like the same author created them.
 Further we recoginize that we are dealing with existing implementations. To this end when guidlines are changing, the following rules apply:
 
 * existing APIs don’t have to be changed, but we recommend it
+  
 * clients of existing APIs have to cope with these APIs based on outdated rules
+  
 * new APIs have to respect the current guidelines
 
 
 **Note :** all example URL's used in this document are fictitous. They do not really exists and are used here only for illustrative purposes
 
+**Accrediation** : This guide relies on and borrows heavily from a number of open source, and widely used reference. We give thanks to theses sources for helping along our journey, and letting us build off of thier work and expereinces. Please see the the [Accredidation](#accredidation) sections for notable sources 
+
+## Document Semantics, Formatting, and Naming
+The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
+
+The words "REST" and "RESTful" MUST be written as presented here, representing the acronym as all upper-case letters. This is also true of "JSON," "XML," and other acronyms.
+
+Machine-readable text, such as URLs, HTTP verbs, and source code, are represented using a fixed-width font.
+
+URIs containing variable blocks are specified according to URI Template RFC 6570. For example, a URL containing a variable called account_id would be shown as https://foo.com/accounts/{account_id}.
+
+HTTP headers are written in title case + hyphenated syntax, e.g. Foo-Request-Id.
+
 
 # Principles
-
+--------------------
 ### [API design principles](#api-design-principles)
 
 Comparing SOA web service interfacing style of SOAP vs. REST, the former tend to be centered around operations that are usually use-case specific and specialized. In contrast, REST is centered around business (data) entities exposed as resources that are identified via URIs and can be manipulated via standardized CRUD-like methods using different representations, and hypermedia. RESTful APIs tend to be less use-case specific and come with less rigid client / server coupling and are more suitable for an ecosystem of (core) services providing a platform of APIs to build diverse new business services. We apply the RESTful web service principles to all kind of application (micro-) service components, independently from whether they provide functionality via the internet or intranet.
@@ -207,18 +217,6 @@ On the other hand, API First obviously is in conflict with the bad practice of p
 
 # General Guidelines
 
-## Document Semantics, Formatting, and Naming
-The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
-
-The words "REST" and "RESTful" MUST be written as presented here, representing the acronym as all upper-case letters. This is also true of "JSON," "XML," and other acronyms.
-
-Machine-readable text, such as URLs, HTTP verbs, and source code, are represented using a fixed-width font.
-
-URIs containing variable blocks are specified according to URI Template RFC 6570. For example, a URL containing a variable called account_id would be shown as https://foo.com/accounts/{account_id}.
-
-HTTP headers are written in title case + hyphenated syntax, e.g. Foo-Request-Id.
-
-
 ## **MUST** design the API first
 
 You must follow the [API First Principle](#api-first), more specifically:
@@ -262,6 +260,20 @@ The user manual must be published online. Please do not forget to include a link
 All APIs must be written in U.S. English to keep the language and spelling consistent
 
 # URLs
+--------------------
+## **MUST** keep URLs verb-free
+  Verbs must not appear in URL's. REST URL's define resources, not actions. Instead actions are indicated as part of the HTTP method. 
+
+  *Incorrect* : `GET api.airmiles.ca/collectors/search`                       
+    
+  *Correct*   : `GET api.airmiles.ca/collectors/searches`
+
+## **MUST NOT** pass sensitive information in the URL
+  
+  We must not pass data the could be considered sensitive (e.g. Personal Information (PI) like credit card numbers, user name etc) in the URLS since it will be exposed to various caching and logging technologies (browser cache, CDN, Splunk etc). 
+
+  ***see overloaded POST for solutions
+
 
 ## **MUST** pluralize resource names that are collections
   The majority of resources available in a RESTful API are collections. These should be pluralized to indicate they are access points to many resources
@@ -282,13 +294,6 @@ All APIs must be written in U.S. English to keep the language and spelling consi
 
   
 
-## **MUST** use kebab-case for compound words in path segments
-  We use kabab casining (e.g. kebab-case) to make our URL's more readable. Although there are many ways of making URL's more readable, for example using camel casing (e.g. camelCase) and title casing (e.g. TitleCase), they have their drawbacks. In particular, although URL's in browsers are case insensitive, a number of caching mechanism's both at the CDN and hardware level are not. This makes using kebab case the easiest and most reliable way of insuring human readble URL's with consistency of experience for the user
-
-  *Incorrect* : `api.airmiles.ca/CollectorExperience/1234`
-                `api.airmiles.ca/collectorExperience/1234` 
-    
-  *Correct*   : `api.airmiles.ca/collectors-experience/1234`  
 
 ## **MUST** use normalized paths without empty path segments and trailing slashes
   Resources must not end with a slash
@@ -299,52 +304,19 @@ All APIs must be written in U.S. English to keep the language and spelling consi
   
   *Correct*   : `api.airmiles.ca/collectors/1234`
 
-## **MUST** keep URLs verb-free
-  Verbs must not appear in URL's. REST URL's define resources, not actions. Instead actions are indicated as part of the HTTP method. 
 
-  *Incorrect* : `GET api.airmiles.ca/collectors/search`                       
+## **MUST** use kebab-case for compound words in path segments
+  We use kabab casining (e.g. kebab-case) to make our URL's more readable. Although there are many ways of making URL's more readable, for example using camel casing (e.g. camelCase) and title casing (e.g. TitleCase), they have their drawbacks. In particular, although URL's in browsers are case insensitive, a number of caching mechanism's both at the CDN and hardware level are not. This makes using kebab case the easiest and most reliable way of insuring human readble URL's with consistency of experience for the user
+
+  *Incorrect* : `api.airmiles.ca/CollectorExperience/1234`
+                `api.airmiles.ca/collectorExperience/1234` 
     
-  *Correct*   : `GET api.airmiles.ca/collectors/searches`
-
-
-## **MUST** identify resources and sub-resources via path segments
-If a resource can not exists without a parent resource, this relation must be represented as a sub-resource. A sub-resource should be indicated by its name and identifier in the path segment. 
-
-      *Example*   : `GET api.airmiles.ca/shopping-cart/1234/cart-item/10`
-
-## **MAY** consider using nested URLs for dependant resources
-If a resource may exists without a parent resource, this relation may be represented as a sub-resource. 
-
-*Example*   : `api.airmiles.ca/collectors/1/orders/123`
-              `api.airmiles.ca/orders/123`
-
-
-## **SHOULD** limit number of resource types
-As a general rule, having more than 3-4 resources levels is a good indication that the problem space is too large, and we are violating the single responsabiltiy principle. A resource level is defined as any top level resource in the domain
-
-
-*Example*   : `api.airmiles.ca/collectors/{id}`
-              `api.airmiles.ca/collectors/{id}}/orders/{oid}`
-              `api.airmiles.ca/collectors/segment`
-              `api.airmiles.ca/orders/{id}}`
-              
-
-Here we have 3 resources. One for collector, one for collector orders, and one for orders. We do not consider the segment resource as a new resource because there is a one to one relation between collectors and segments.
-
-
-## **SHOULD** limit number of sub-resource levels
-  As the number of resource in a the path increases, the scope of the domain as well as the complexity increases. To minimize this we should try to keep sub resource depth to a maximum of 3 level
-
-      *Good* : `api.airmiles.ca/collector/{id}/orders/{oid}/item/{iid}`
-      *Bad*  : `api.airmiles.ca/collector/{id}/orders/{oid}/item/{iid}/supplier/{sid}/addresses/{aid}}`
-
+  *Correct*   : `api.airmiles.ca/collectors-experience/1234`  
 
 ## **MUST** use snake_case for query parameters
-  We must use snake case for query parameters. This helps avoid various techniologies that are case sensitive in the web ecosystem
+  We use snake case for query parameters. This helps avoid various techniologies that are case sensitive in the web ecosystem
 
     *Example* : `api.airmiles.ca/collector/1234?order_id=1234` 
-
-
  
 ## **MUST** stick to conventional query parameters
   If you provide query support for searching, sorting, filtering, and paginating, you must stick to the following naming conventions:
@@ -357,30 +329,40 @@ Here we have 3 resources. One for collector, one for collector orders, and one f
 
   limit: client suggested limit to restrict the number of entries on a page.
 
+  fields: field name expression to retrieve only a subset of fields of a resource. See `SHOULD support partial responses via filtering` below.
 
-## **MUST NOT** pass sensitive information in the URL
-  
-  We must not pass data the could be considered sensitive (e.g. Personal Information (PI) like credit card numbers, user name etc) in the URLS since it will be exposed to various caching and logging technologies (browser cache, CDN, Splunk etc). 
 
-  ***see overloaded POST for solutions
+## **SHOULD** limit number of resource types
+As a general rule, having more than 3-4 resources levels is a good indication that the problem space is too large, and we are violating the single responsabiltiy principle. In these cases we should consider breaking down the problem domain into it's subsequent parts
 
-## **SHOULD NOT** use null for query parameters
+A resource level is defined as any top level resource in the domain
+
+
+*Example*   : `api.airmiles.ca/collectors/{id}`
+              `api.airmiles.ca/collectors/{id}}/orders/{oid}`
+              `api.airmiles.ca/collectors/segment`
+              `api.airmiles.ca/orders/{id}}`
+              
+
+Here we have 3 resources. One for collector, one for collector orders, and one for orders. We do not consider the segment resource as a new resource because there is a one to one relation between collectors and segments.
+
+Given this definition, our experience is that well defined APIs involve no more than 4 to 8 resource types. There may be exceptions with more complex business domains that require more resources, but you should first check if you can split them into separate subdomains with distinct APIs.
+
+Nevertheless one API should hold all necessary resources to model complete business processes helping clients to understand these flows.
+
+## **SHOULD NOT** use null or empty values for query parameter filtering
   We should not use null values as input or state indicators. Instead we should either build up a domain specific language, or use a null object pattern to indicate the absense of a value.
 
   *Incorrect* : `api.airmiles.ca/collectors/{id}/segments?type=null`
+                `api.airmiles.ca/collectors/{id}/segments?type=`
                     
   *Correct*   : `api.airmiles.ca/collectors-experience/1234?type=none` 
 
 
-
-
 # Security 
-
+--------------------
   ## **MUST** secure endpoints
-  Every API endpoint must be protected and armed with authentication and authorization. As part of the API definition you must specify how you protect your API using either the `http` typed `bearer` or `oauth2` typed security schemes defined in the [OpenAPI Authentication Specification](https://swagger.io/docs/specification/authentication/).
-
-
-
+  Every API endpoint must be protected and armed with authentication. As part of the API definition you must specify how you protect your API using either the `http` typed `bearer` or `oauth2` typed security schemes defined in the [OpenAPI Authentication Specification](https://swagger.io/docs/specification/authentication/).
 
   ## **MUST** not expose stack traces
 
@@ -420,18 +402,20 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
   As a result of supporting Internet JSON ([RFC 7493](https://tools.ietf.org/html/rfc7493)), a JSON payload must consist of [valid Unicode strings](https://tools.ietf.org/html/rfc7493#section-2.1), i.e. must not contain non-characters or surrogates, and
 
   ## **MUST** use JSON payloads consisting of unique member names
+  
   As a result of supporting Internet JSON ([RFC 7493](https://tools.ietf.org/html/rfc7493)), a JSON payload must contain only [unique member names](https://tools.ietf.org/html/rfc7493#section-2.3) (no duplicate names).
-
-  ## **MAY** pass non-JSON media types using data specific standard formats
-
-  Non-JSON media types may be supported, if you stick to a business object specific standard format for the payload data, for instance, image data format (JPG, PNG, GIF), document format (PDF, DOC, ODF, PPT, CSV), or archive format (TAR, ZIP).
-
-  Generic structured data interchange formats other than JSON (e.g. XML, BSON) may be provided, but only additionally to JSON as default format using content negotiation, for specific use cases where clients may not interpret the payload structure.
   
   ## **SHOULD** not use null for empty arrays
   Empty array values can unambiguously be represented as the empty list, [].
 
   
+
+
+  ## **MAY** pass non-JSON media types using data specific standard formats
+
+    Non-JSON media types may be supported, if you stick to a business object specific standard format for the payload data, for instance, image data format (JPG, PNG, GIF), document format (PDF, DOC, ODF, PPT, CSV), or archive format (TAR, ZIP).
+
+    Generic structured data interchange formats other than JSON (e.g. XML, BSON) may be provided, but only additionally to JSON as default format using content negotiation, for specific use cases where clients may not interpret the payload structure.
 
 # HTTP Requests
 -------------------------
@@ -446,30 +430,6 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
   | `PUT`       | To _update_ a resource.                                                    |
   | `DELETE`    | To _delete_ a resource.                                                    |
   | `PATCH`     | To perform a _partial update_ to a resource.                               |  
-
-
-  ## **MAY** use overloaded POST
-  
-
-  We should always make our absolute best effort to keep in the spirit of REST, and use the REST VERBs as intended. 
-  
-  Avoid the techique below if at all possible 
-
-  In some very specific scenarios it might be not be possible to use the REST verbs as intended. A good example is a bodyless requests verbs like GET or DELETE may not be able to avoid requiring a request body. One scenario is when it is not allowable to expose sensitive information (e.g. PI, credit card numbers etc) within the URL since it will be exposed to various caching and logging technologies (browser cache, CDN, Splunk etc). Or the query parameters could exceed size limits of a piece of technology in the stack (e.g. clients, load-balancers, and servers). 
-
-  In cases like this it is advised to use overloaded POST as a technique to overcome this limitation. 
-  
-  In this case we use the POST VERB for a GET or DELETE operation, and make sure we explicitly note the exception in our documentation like so :
-
-    paths:
-      /collectors:
-        post:
-          description: >
-            [GET with body payload](https://github.com/LoyaltyOne/API-Guidelines#may-use-overloaded-post) - no resources created:
-            Returns all collectors matching the query passed as request input payload.
-          requestBody:
-            required: true
-            content:
     
 
   ## **MUST** design GET, HEAD, OPTIONS, TRACE to be safe
@@ -570,7 +530,31 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
 [JSON-specific rules](#json-guidelines) and most certainly needs to make use of the [`GET`\-with-body](#get-with-body) pattern.
 
 
+
+## **MAY** use overloaded POST
+  
+  We should always make our absolute best effort to keep in the spirit of REST, and use the REST VERBs as intended. 
+  
+  Avoid the techique below if at all possible 
+
+  In some very specific scenarios it might be not be possible to use the REST verbs as intended. A good example is a bodyless requests verbs like GET or DELETE may not be able to avoid requiring a request body. One scenario is when it is not allowable to expose sensitive information (e.g. PI, credit card numbers etc) within the URL since it will be exposed to various caching and logging technologies (browser cache, CDN, Splunk etc). Or the query parameters could exceed size limits of a piece of technology in the stack (e.g. clients, load-balancers, and servers). 
+
+  In cases like this it is advised to use overloaded POST as a technique to overcome this limitation. 
+  
+  In this case we use the POST VERB for a GET or DELETE operation, and make sure we explicitly note the exception in our documentation like so :
+
+    paths:
+      /collectors:
+        post:
+          description: >
+            [GET with body payload](https://github.com/LoyaltyOne/API-Guidelines#may-use-overloaded-post) - no resources created:
+            Returns all collectors matching the query passed as request input payload.
+          requestBody:
+            required: true
+            content:
+
 #  HTTP Status Codes
+--------------------
   ## **MUST** use official HTTP status codes 
 
   You must only use official HTTP status codes consistently with their intended semantics.  
@@ -640,10 +624,8 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
 
    
 # HTTP Headers
-  ## **MAY** use standard headers
-  Use [this list](http://en.wikipedia.org/wiki/List_of_HTTP_header_fields) and explicitly mention its support in your OpenAPI definition.
-
-  ## **SHOULD** use kebab-case with uppercase separate words for HTTP headers
+--------------------
+  ## **MUST** use kebab-case with uppercase separate words for HTTP headers
 
   This convention is followed by (most of) the standard headers e.g. as defined in [RFC 2616](https://tools.ietf.org/html/rfc2616) and [RFC 4229](https://tools.ietf.org/html/rfc4229). Examples:
 
@@ -653,6 +635,36 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
     Language
 
   Note, HTTP standard defines headers as case-insensitive ([RFC 7230, p.22](https://tools.ietf.org/html/rfc7230#page-22)). However, for sake of readability and consistency you should follow the convention when using standard or proprietary headers. Exceptions are common abbreviations like `ID`.
+  
+  ## **MUST** propagate proprietary headers
+
+  All LoyatyOne’s proprietary headers listed above are end-to-end headers and must be propagated to the services down the call chain. The header names and values must remain unchanged.
+
+  ## **SHOULD** use only the specified proprietary AMRP headers (provide list)
+
+  As a general rule, proprietary HTTP headers should be avoided. From a conceptual point of view, the business semantics and intent of an operation should always be expressed via the URLs path and query parameters, the method, and the content, but not via proprietary headers. Headers are typically used to implement protocol processing aspects, such as flow control, content negotiation, and authentication, and represent business agnostic request modifiers that provide generic context information ([RFC 7231](https://tools.ietf.org/html/rfc7231#section-5)).
+
+  However, the exceptional usage of proprietary headers is still helpful when domain-specific generic context information…​
+
+  1.  needs to be passed end to end along the service call chain (even if not all called services use it as input for steering service behavior and/or…​
+      
+  2.  is provided by specific gateway components.
+      
+
+  Below, we explicitly define the list of proprietary header exceptions usable for all services for passing through generic context information of our fashion domain (use case 1).
+
+  Remember that HTTP header field names are not case-sensitive:
+
+
+  Header field name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Type | Description | Header field value example
+  |-|-|-|-|
+  Idempotency-Key | String | Used to indicate idempotent handling of the request | 9f8b3ca3-4be5-436c-a847-9cd55460c495
+  Collector-Number | String | Used to indicate the collector number | 11111111
+
+
+  ## **MAY** use standard headers
+  Use [this list](http://en.wikipedia.org/wiki/List_of_HTTP_header_fields) and explicitly mention its support in your OpenAPI definition.
+
 
   ## **MAY** consider to support Idempotency-Key header
 
@@ -689,35 +701,9 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
 
   
 
-  ## **SHOULD** use only the specified proprietary AMRP headers (provide list)
-
-  As a general rule, proprietary HTTP headers should be avoided. From a conceptual point of view, the business semantics and intent of an operation should always be expressed via the URLs path and query parameters, the method, and the content, but not via proprietary headers. Headers are typically used to implement protocol processing aspects, such as flow control, content negotiation, and authentication, and represent business agnostic request modifiers that provide generic context information ([RFC 7231](https://tools.ietf.org/html/rfc7231#section-5)).
-
-  However, the exceptional usage of proprietary headers is still helpful when domain-specific generic context information…​
-
-  1.  needs to be passed end to end along the service call chain (even if not all called services use it as input for steering service behavior and/or…​
-      
-  2.  is provided by specific gateway components.
-      
-
-  Below, we explicitly define the list of proprietary header exceptions usable for all services for passing through generic context information of our fashion domain (use case 1).
-
-  Remember that HTTP header field names are not case-sensitive:
-
-
-  Header field name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Type | Description | Header field value example
-  |-|-|-|-|
-  Idempotency-Key | String | Used to indicate idempotent handling of the request | 9f8b3ca3-4be5-436c-a847-9cd55460c495
-  Collector-Number | String | Used to indicate the collector number | 11111111
-
-  
-  ## **MUST** propagate proprietary headers
-
-  All LoyatyOne’s proprietary headers listed above are end-to-end headers and must be propagated to the services down the call chain. The header names and values must remain unchanged.
-
   
 # REST Compliance Levels
-
+--------------------
   ## **MUST** use REST maturity level 2
 
   We strive for a good implementation of [REST Maturity Level 2](http://martinfowler.com/articles/richardsonMaturityModel.html#level2) as it enables us to build resource-oriented APIs that make full use of HTTP verbs and status codes. 
@@ -742,7 +728,7 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
 
 
 # Performance
-
+--------------------
   ## **SHOULD** reduce bandwidth needs and improve responsiveness
 
   APIs should support techniques for reducing bandwidth based on client needs. This holds for APIs that (might) have high payloads and/or are used in high-traffic scenarios like the public Internet and telecommunication networks. Typical examples are APIs used by mobile web app clients with (often) less bandwidth connectivity. (LoyatyOne is a 'Mobile First' company, so be mindful of this point.)
@@ -765,14 +751,7 @@ These guidelines provides recommendations for defining JSON data at LoyatyOne. J
 
   Though gzip compression might be the default choice for server payload, the server should also support payload without compression and its client control via [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) request header — see also [RFC 7231 Section 5.3.4](https://tools.ietf.org/html/rfc7231#section-5.3.4). The server should indicate used gzip compression via the [`Content-Encoding`](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) header.
 
-
   ## **SHOULD** support partial responses via filtering
-
-  Compress the payload of your API’s responses with gzip, unless there’s a good reason not to — for example, you are serving so many requests that the time to compress becomes a bottleneck. This helps to transport data faster over the network (fewer bytes) and makes frontends respond faster.
-
-Though gzip compression might be the default choice for server payload, the server should also support payload without compression and its client control via [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) request header — see also [RFC 7231 Section 5.3.4](https://tools.ietf.org/html/rfc7231#section-5.3.4). The server should indicate used gzip compression via the [`Content-Encoding`](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) header.
-
-## **SHOULD** support partial responses via filtering
 
   Depending on your use case and payload size, you can significantly reduce network bandwidth need by supporting filtering of returned entity fields. Here, the client can explicitly determine the subset of fields he wants to receive via the [`fields`](#fields) query parameter. (It is analogue to [GraphQL `fields`](https://graphql.org/learn/queries/#fields) and simple queries, and also applied, for instance, for [Google Cloud API’s partial responses](https://cloud.google.com/storage/docs/json_api/v1/how-tos/performance#partial-response).)
 
@@ -833,7 +812,8 @@ Though gzip compression might be the default choice for server payload, the serv
 
 
 # Compatibility and Versioning
- ## **MUST** not break backward compatibility 
+--------------------
+## **MUST** not break backward compatibility 
 
 Change APIs, but keep all consumers running. Consumers usually have independent release lifecycles, focus on stability, and avoid changes that do not provide additional value. APIs are contracts between service providers and service consumers that cannot be broken via unilateral decisions.
 
@@ -848,6 +828,39 @@ We strongly encourage using compatible API extensions and discourage versioning 
 
 **Note:** There is a difference between incompatible and breaking changes. Incompatible changes are changes that are not covered by the compatibility rules below. Breaking changes are incompatible changes deployed into operation, and thereby breaking running API consumers. Usually, incompatible changes are breaking changes when deployed into operation. However, in specific controlled situations it is possible to deploy incompatible changes in a non-breaking way, if no API consumer is using the affected API aspects (see also `Deprecation` guidelines).
 
+
+## **MUST** not use URL versioning
+
+With URL versioning a (major) version number is included in the path, e.g. `/v1/customers`. The consumer has to wait until the provider has been released and deployed. If the consumer also supports hypermedia links — even in their APIs — to drive workflows (HATEOAS), this quickly becomes complex. So does coordinating version upgrades — especially with hyperlinked service dependencies — when using URL versioning. To avoid this tighter coupling and complexer release management we do not use URL versioning
+
+## **MUST** prepare clients to accept compatible API extensions
+
+Service clients should apply the robustness principle:
+   
+*   Be tolerant in processing and reading data of API responses, more specifically service clients must be prepared for compatible API extensions of response data:
+    
+    *   Be tolerant with unknown fields in the payload (see also Fowler’s ["TolerantReader"](http://martinfowler.com/bliki/TolerantReader.html) post), i.e. ignore new fields but do not eliminate them from payload if needed for subsequent `PUT` requests.
+        
+    *   Be prepared that `Enum` return parameter may deliver new values; either be agnostic or provide default behavior for unknown values.
+        
+    *   Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions. Note also, that status codes are extensible. Default handling is how you would treat the corresponding `2xx` code (see [RFC 7231 Section 6](https://tools.ietf.org/html/rfc7231#section-6)).
+        
+    *   Follow the redirect when the server returns HTTP status code `301 (Moved Permanently)`.
+
+
+## **SHOULD** avoid versioning
+
+When changing your RESTful APIs, do so in a compatible way and avoid generating additional API versions. Multiple versions can significantly complicate understanding, testing, maintaining, evolving, operating and releasing our systems ([supplementary reading](http://martinfowler.com/articles/enterpriseREST.html)).
+
+If changing an API can’t be done in a compatible way, then proceed in one of these three ways:
+
+*   create a new resource (variant) in addition to the old resource variant
+    
+*   create a new service endpoint — i.e. a new application with a new API (with a new domain name)
+    
+*   create a new API version supported in parallel with the old API by the same microservice
+    
+As we discourage versioning by all means because of the manifold disadvantages, we strongly recommend to only use the first two approaches.
 
 ## **SHOULD** prefer compatible extensions
 
@@ -888,57 +901,12 @@ Not ignoring unknown input fields is a specific deviation from Postel’s Law (e
 
 In specific situations, where a (known) input field is not needed anymore, it either can stay in the API definition with "not used anymore" description or can be removed from the API definition as long as the server ignores this specific parameter.
 
-## **MUST** prepare clients to accept compatible API extensions
-
-Service clients should apply the robustness principle:
-   
-*   Be tolerant in processing and reading data of API responses, more specifically service clients must be prepared for compatible API extensions of response data:
-    
-    *   Be tolerant with unknown fields in the payload (see also Fowler’s ["TolerantReader"](http://martinfowler.com/bliki/TolerantReader.html) post), i.e. ignore new fields but do not eliminate them from payload if needed for subsequent `PUT` requests.
-        
-    *   Be prepared that `Enum` return parameter may deliver new values; either be agnostic or provide default behavior for unknown values.
-        
-    *   Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions. Note also, that status codes are extensible. Default handling is how you would treat the corresponding `2xx` code (see [RFC 7231 Section 6](https://tools.ietf.org/html/rfc7231#section-6)).
-        
-    *   Follow the redirect when the server returns HTTP status code `301 (Moved Permanently)`.
-        
-    
-
-## **MUST** treat OpenAPI specification as open for extension by default
-
-The OpenAPI specification is not very specific on default extensibility of objects, and redefines JSON-Schema keywords related to extensibility, like `additionalProperties`. Following our compatibility guidelines, OpenAPI object definitions are considered open for extension by default as per [Section 5.18 "additionalProperties"](http://json-schema.org/latest/json-schema-validation.html#rfc.section.5.18) of JSON-Schema.
-
-When it comes to OpenAPI, this means an `additionalProperties` declaration is not required to make an object definition extensible:
-
-* API clients consuming data must not assume that objects are closed for extension in the absence of an `additionalProperties` declaration and must ignore fields sent by the server they cannot process. This allows API servers to evolve their data formats.
-    
-* For API servers receiving unexpected data, the situation is slightly different. Instead of ignoring fields, servers _may_ reject requests whose entities contain undefined fields in order to signal to clients that those fields would not be stored on behalf of the client. API designers must document clearly how unexpected fields are handled for `PUT`, [`POST`](#post), and [`PATCH`](#patch) requests.
-  
-API formats must not declare `additionalProperties` to be false, as this prevents objects being extended in the future.
-
-## **SHOULD** avoid versioning
-
-When changing your RESTful APIs, do so in a compatible way and avoid generating additional API versions. Multiple versions can significantly complicate understanding, testing, maintaining, evolving, operating and releasing our systems ([supplementary reading](http://martinfowler.com/articles/enterpriseREST.html)).
-
-If changing an API can’t be done in a compatible way, then proceed in one of these three ways:
-
-*   create a new resource (variant) in addition to the old resource variant
-    
-*   create a new service endpoint — i.e. a new application with a new API (with a new domain name)
-    
-*   create a new API version supported in parallel with the old API by the same microservice
-    
-As we discourage versioning by all means because of the manifold disadvantages, we strongly recommend to only use the first two approaches.
-
-## [**MUST** not use URL versioning
-
-With URL versioning a (major) version number is included in the path, e.g. `/v1/customers`. The consumer has to wait until the provider has been released and deployed. If the consumer also supports hypermedia links — even in their APIs — to drive workflows (HATEOAS), this quickly becomes complex. So does coordinating version upgrades — especially with hyperlinked service dependencies — when using URL versioning. To avoid this tighter coupling and complexer release management we do not use URL versioning
 
 
 # Data formats
 -----------------------------------------------
 
-### [**SHOULD** use standard data formats \[238\]](#238)
+## **SHOULD** use standard data formats 
 
 [Open API](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md#data-types) (based on [JSON Schema Validation vocabulary](https://tools.ietf.org/html/draft-bhutton-json-schema-validation-00#section-7.3)) defines formats from ISO and IETF standards for date/time, integers/numbers and binary data. You **must** use these formats, whenever applicable:
 
@@ -989,7 +957,7 @@ We add further OpenAPI formats based other ISO and IETF standards. You **must** 
 
 **Remark:** Please note that this list of standard data formats is not exhaustive and everyone is encouraged to propose additions.
 
-## [**MUST** use standard formats for date and time properties \[169\]](#169)
+## **MUST** use standard formats for date and time properties 
 
 As a specific case of `**SHOULD** use standard data formats`, you must use the `string` typed formats `date`, `date-time`, `time`, `duration`, or `period` for the definition of date and time properties. The formats are based on the standard [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile -- a subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601)
 
@@ -998,7 +966,7 @@ As a specific case of `**SHOULD** use standard data formats`, you must use the `
 As defined by the standard, time zone offset may be used, however, we recommend to only use times based on UTC without local offsets. For example `2015-05-28T14:07:17Z` rather than `2015-05-28T14:07:17+00:00`. From experience we have learned that zone offsets are not easy to understand and often not correctly handled. Note also that zone offsets are different from local times which may include daylight saving time. When it comes to storage, all dates should be consistently stored in UTC without a zone offset. Localization should be done locally by the services that provide user interfaces, if required.
 
 
-## [**MUST** use standard formats for country, language and currency properties \[170\]](#170)
+## **MUST** use standard formats for country, language and currency properties 
 
 As a specific case of `**MUST** use standard data formats` you must use the following standard formats:
 
@@ -1016,15 +984,14 @@ As a specific case of `**MUST** use standard data formats` you must use the foll
 In some situations the API supports serving different representations of a specific resource (at the same URL) e.g. JSON, PDF, TEXT, or HTML representations for an invoice resource. You should use [content negotiation](https://en.wikipedia.org/wiki/Content_negotiation) to support clients specifying via the standard HTTP headers [`Accept`](https://tools.ietf.org/html/rfc7231#section-5.3.2), [`Accept-Language`](https://tools.ietf.org/html/rfc7231#section-5.3.5), [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) which representation is best suited for their use case, for example, which language of a document, representation / content format, or content encoding. You [**SHOULD** use standard media types](#172) like `application/json` or `application/pdf` for defining the content format in the [`Accept`](https://tools.ietf.org/html/rfc7231#section-5.3.2) header.
 
 
-# References
+# Accredidation
 
 https://www.ics.uci.edu/~fielding/pubs/dissertation
+
+https://opensource.zalando.com/restful-api-guidelines/
 
 https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design
 
 https://cloud.google.com/apis/design
 
-https://opensource.zalando.com/restful-api-guidelines
-
-https://martinfowler.com/articles/richardsonMaturityModel.html
 
