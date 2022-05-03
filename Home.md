@@ -275,8 +275,8 @@ All APIs must be written in U.S. English to keep the language and spelling consi
 
   Example : 
 
-    Incorrect : /collector/{id}
-    Correct   : /collectors/{id}
+  *Incorrect* : /collector/{id}
+  *Correct*   : /collectors/{id}
 
 
   In cases where the resource is a singular entity, the pluralization may be dropped.
@@ -290,28 +290,31 @@ All APIs must be written in U.S. English to keep the language and spelling consi
   ## **MUST** use normalized paths without empty path segments and trailing slashes
   Resources must not end with a slash or contain empty path segments
 
-  *Incorrect* : `api.airmiles.ca/collectors/1234/` 
-                `api.airmiles.ca/collectors/1234//`
-                `api.airmiles.ca/collectors///1234//`
-  
-  *Correct*   : `api.airmiles.ca/collectors/1234`
+  *Incorrect* : <br />
+  `api.airmiles.ca/collectors/1234/` <br />
+  `api.airmiles.ca/collectors/1234//` <br />
+  `api.airmiles.ca/collectors///1234//` <br />
+
+  *Correct*   : <br />
+  `api.airmiles.ca/collectors/1234` <br />
 
 
   ## **MUST** use kebab-case for compound words in path segments
   We use kabab casining (e.g. kebab-case) to make our URL's more readable. Although there are many ways of making URL's more readable, for example using camel casing (e.g. camelCase) and title casing (e.g. TitleCase), they have their drawbacks. In particular, although URL's in browsers are case insensitive, a number of caching mechanism's both at the CDN and hardware level are not. This makes using kebab case the easiest and most reliable way of insuring human readble URL's with consistency of experience for the user
 
-  *Incorrect* : <br>
-  `api.airmiles.ca/CollectorExperience/1234` <br>
-  `api.airmiles.ca/collectorExperience/1234` <br>
-  `api.airmiles.ca/collector_experience/1234` <br>
+  *Incorrect* : <br />
+  `api.airmiles.ca/CollectorExperience/1234` <br />
+  `api.airmiles.ca/collectorExperience/1234` <br />
+  `api.airmiles.ca/collector_experience/1234`<br />
 
-  *Correct*   : <br>
+  *Correct*   : <br />
   `api.airmiles.ca/collectors-experience/1234`  
 
   ## **MUST** use snake_case for query parameters
   We use snake case for query parameters. This helps avoid various techniologies that are case sensitive in the web ecosystem and makes the query portion of the URL easily distinguishable from the canonical portion
 
-    *Example* : `api.airmiles.ca/collector/1234?order_id=1234` 
+  *Example* : <br />
+  `api.airmiles.ca/collector/1234?order_id=1234` 
   
   ## **MUST** stick to conventional query parameters
   If you provide query support for searching, sorting, filtering, and paginating, you must stick to the following naming conventions:
@@ -341,10 +344,10 @@ All APIs must be written in U.S. English to keep the language and spelling consi
 
   
   *Examples*  
-  `api.airmiles.ca/collectors/{id}` <br>
-  `api.airmiles.ca/collectors/{id}}/orders/{oid}` <br>
-  `api.airmiles.ca/collectors/segment` <br>
-  `api.airmiles.ca/orders/{id}}`<br>
+  `api.airmiles.ca/collectors/{id}` <br />
+  `api.airmiles.ca/collectors/{id}}/orders/{oid}` <br />
+  `api.airmiles.ca/collectors/segment` <br />
+  `api.airmiles.ca/orders/{id}}`<br />
 
                
 
@@ -357,11 +360,11 @@ All APIs must be written in U.S. English to keep the language and spelling consi
   ## **SHOULD NOT** use null or empty values for query parameter filtering
   We should not use null values as input or state indicators. Instead we should either build up a domain specific language, or use a null object pattern to indicate the absense of a value.
 
-  *Incorrect* : <br>
-  `api.airmiles.ca/collectors/{id}/segments?type=null`<br>
+  *Incorrect* : <br />
+  `api.airmiles.ca/collectors/{id}/segments?type=null`<br />
   `api.airmiles.ca/collectors/{id}/segments?type=`
                     
-  *Correct*   : <br> 
+  *Correct*   : <br /> 
   `api.airmiles.ca/collectors-experience/1234?type=none` 
 
 
