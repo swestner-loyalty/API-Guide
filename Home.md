@@ -74,7 +74,7 @@
     - [**MUST** use standard formats for date and time properties](#must-use-standard-formats-for-date-and-time-properties)
     - [**MUST** use standard formats for country, language and currency properties](#must-use-standard-formats-for-country-language-and-currency-properties)
     - [**SHOULD** use content negotiation, if clients may choose from different resource representations](#should-use-content-negotiation-if-clients-may-choose-from-different-resource-representations)
-- [Accredidation](#accredidation)
+- [Accreditation](#accredidation)
 
 # Introduction
 --------------------
@@ -109,7 +109,7 @@ Further we recoginize that we are dealing with existing implementations. To this
 
 **Note :** all example URL's used in this document are fictitous. They do not really exists and are used here only for illustrative purposes
 
-**Accrediation** : This guide relies on and borrows heavily from a number of open source, and widely used reference. We give thanks to theses sources for helping along our journey, and letting us build off of thier work and expereinces. Please see the the [Accredidation](#accredidation) sections for notable sources 
+**Accrediation** : This guide relies on and borrows heavily from a number of open source, and widely used reference. We give thanks to theses sources for helping along our journey, and letting us build off of thier work and expereinces. Please see the the [Accreditation](#accredidation) sections for notable sources 
 
   ## Document Semantics, Formatting, and Naming
     The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
@@ -996,7 +996,7 @@ In specific situations, where a (known) input field is not needed anymore, it ei
 In some situations the API supports serving different representations of a specific resource (at the same URL) e.g. JSON, PDF, TEXT, or HTML representations for an invoice resource. You should use [content negotiation](https://en.wikipedia.org/wiki/Content_negotiation) to support clients specifying via the standard HTTP headers [`Accept`](https://tools.ietf.org/html/rfc7231#section-5.3.2), [`Accept-Language`](https://tools.ietf.org/html/rfc7231#section-5.3.5), [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) which representation is best suited for their use case, for example, which language of a document, representation / content format, or content encoding. You [**SHOULD** use standard media types](#172) like `application/json` or `application/pdf` for defining the content format in the [`Accept`](https://tools.ietf.org/html/rfc7231#section-5.3.2) header.
 
 
-# Accredidation
+# Accreditation
 
 https://www.ics.uci.edu/~fielding/pubs/dissertation
 
