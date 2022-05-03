@@ -336,20 +336,13 @@ All APIs must be written in U.S. English to keep the language and spelling consi
   In these cases we should consider breaking down the problem domain into it's subsequent parts
 
   A resource level is defined as any top level resource in the domain
-
-
-
-
-| Normal Key | Value2 |
-
   
   *Examples*  
   `api.airmiles.ca/collectors/{id}` <br />
   `api.airmiles.ca/collectors/{id}}/orders/{oid}` <br />
   `api.airmiles.ca/collectors/segment` <br />
   `api.airmiles.ca/orders/{id}}`<br />
-
-               
+             
 
   Here we have 3 resources. One for collector, one for collector orders, and one for orders. We do not consider the segment resource as a new resource because there is a one to one relation between collectors and segments.
 
@@ -422,9 +415,9 @@ All APIs must be written in U.S. English to keep the language and spelling consi
 
   ## **MAY** pass non-JSON media types using data specific standard formats
 
-    Non-JSON media types may be supported, if you stick to a business object specific standard format for the payload data, for instance, image data format (JPG, PNG, GIF), document format (PDF, DOC, ODF, PPT, CSV), or archive format (TAR, ZIP).
+  Non-JSON media types may be supported, if you stick to a business object specific standard format for the payload data, for instance, image data format (JPG, PNG, GIF), document format (PDF, DOC, ODF, PPT, CSV), or archive format (TAR, ZIP).
 
-    Generic structured data interchange formats other than JSON (e.g. XML, BSON) may be provided, but only additionally to JSON as default format using content negotiation, for specific use cases where clients may not interpret the payload structure.
+  Generic structured data interchange formats other than JSON (e.g. XML, BSON) may be provided, but only additionally to JSON as default format using content negotiation, for specific use cases where clients may not interpret the payload structure.
 
 # HTTP Requests
 -------------------------
