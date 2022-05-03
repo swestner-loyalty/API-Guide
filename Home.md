@@ -574,59 +574,65 @@ In these scenarios, [overloaded POST](#may-use-overloaded-post) will need to be 
 
   ## **SHOULD** only use most common HTTP status codes
 
-  ### [Success codes](#success-codes)
+  <br />
 
-  Code | Meaning | Methods
-    -|-|-|
-    [200](#status-code-200) | OK - this is the standard success response |  `<all>`
-    [201](#status-code-201) | Created - Returned on successful entity creation. You are free to return either an empty response or the created resource in conjunction with the Location header. (More details found in the [\[standard-headers\]](#standard-headers).) _Always_ set the Location header. | [`POST`](#post), `PUT`
-    [202](#status-code-202) | Accepted - The request was successful and will be processed asynchronously. | [`POST`](#post), `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
-    [204](#status-code-204) | No content - There is no response body. | `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
-    [207](#status-code-207) |Multi-Status - The response body contains multiple status informations for different parts of a batch/bulk request (see [**MUST** use code 207 for batch or bulk requests](#152)).| [`POST`](#post), ([`DELETE`](#delete))
+  ### **[Success codes](#success-codes)**
 
+  Code | Meaning | Methods  
+  -|-|-|
+  [200](#status-code-200) | OK - this is the standard success response |  `<all>`
+  [201](#status-code-201) | Created - Returned on successful entity creation. You are free to return either an empty response or the created resource in conjunction with the Location header. (More details found in the [\[standard-headers\]](#standard-headers).) _Always_ set the Location header. | [`POST`](#post), `PUT`
+  [202](#status-code-202) | Accepted - The request was successful and will be processed asynchronously. | [`POST`](#post), `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
+  [204](#status-code-204) | No content - There is no response body. | `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
+  [207](#status-code-207) |Multi-Status - The response body contains multiple status informations for different parts of a batch/bulk request (see [**MUST** use code 207 for batch or bulk requests](#152)).| [`POST`](#post), ([`DELETE`](#delete))
 
+  <br />
 
-  ### [Redirection codes](#redirection-codes)
-
-  Code | Meaning | Methods |
-    |-|-|-|
-    [301](#status-code-301)| Moved Permanently - This and all future requests should be directed to the given URI.|`<all>`
-    [303](#status-code-303)|See Other - The response to the request can be found under another URI using a `GET` method.|[`POST`](#post), `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
-    [304](#status-code-304)|Not Modified - indicates that a conditional GET or HEAD request would have resulted in 200 response if it were not for the fact that the condition evaluated to false, i.e. resource has not been modified since the date or version passed via request headers If-Modified-Since or If-None-Match.|`GET`, [`HEAD`](#head)
-
-  ### [Client side error codes](#client-side-error-codes)
+  ### **[Redirection codes](#redirection-codes)**
 
   Code | Meaning | Methods |
-    |-|-|-|
-    [400](#status-code-400) |Bad request - unspecific client error indicating that the server cannot process the request due to something that is perceived to be a client error (e.g. malformed request syntax, invalid request). Should also be delivered in case of input payload fails business logic / semantic validation (instead of using status code 422).|`<all>`
-    [401](#status-code-401) | Unauthorized - actually "Unauthenticated": credentials are not valid for the target resource. User must log in. | `<all>`
-    [403](#status-code-403) | Forbidden - the user is not authorized to use this resource.|`<all>`
-    [404](#status-code-404) | Not found - the resource is not found. |`<all>`
-    [405](#status-code-405) | Method Not Allowed - the method is not supported, see [`OPTIONS`](#options).| `<all>`
-    [406](#status-code-406) | Not Acceptable - resource can only generate content not acceptable according to the Accept headers sent in the request. | `<all>`
-    [408](#status-code-408)| Request timeout - the server times out waiting for the resource. | `<all>`
-    [409](#status-code-409) | Conflict - request cannot be completed due to conflict with the current state of the target resource. For instance, in situations where two clients try to create the same resource or if there are concurrent, conflicting updates. | [`POST`](#post), `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
-    [410](#status-code-410) | Gone - resource does not exist any longer, e.g. when accessing a resource that has intentionally been deleted. | `<all>`
-    [412](#status-code-412)| Precondition Failed - returned for conditional requests, e.g. [`If-Match`](https://tools.ietf.org/html/rfc7232#section-3.1) if the condition failed. Used for optimistic locking. | `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
-    [415](#status-code-415) | Unsupported Media Type - e.g. clients sends request body without content type. | [`POST`](#post), `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
-    [423](#status-code-423) | Locked - Pessimistic locking, e.g. processing states. | `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
-    [428](#status-code-428) | Precondition Required - server requires the request to be conditional, e.g. to make sure that the "lost update problem" is avoided (see [**MAY** consider to support `Prefer` header to handle processing preferences](#181)).|`<all>`
-    [429](#status-code-429) | Too many requests - the client does not consider rate limiting and sent too many requests (see [**MUST** use code 429 with headers for rate limits](#153)).| `<all>`
+  |-|-|-|
+  [301](#status-code-301)| Moved Permanently - This and all future requests should be directed to the given URI.|`<all>`
+  [303](#status-code-303)|See Other - The response to the request can be found under another URI using a `GET` method.|[`POST`](#post), `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
+  [304](#status-code-304)|Not Modified - indicates that a conditional GET or HEAD request would have resulted in 200 response if it were not for the fact that the condition evaluated to false, i.e. resource has not been modified since the date or version passed via request headers If-Modified-Since or If-None-Match.|`GET`, [`HEAD`](#head)
 
-  ### [Server side error codes:](#server-side-error-codes)
+  <br />
 
+  ### **[Client side error codes](#client-side-error-codes)**
+
+  Code | Meaning | Methods |
+  |-|-|-|
+  [400](#status-code-400) |Bad request - unspecific client error indicating that the server cannot process the request due to something that is perceived to be a client error (e.g. malformed request syntax, invalid request). Should also be delivered in case of input payload fails business logic / semantic validation (instead of using status code 422).|`<all>`
+  [401](#status-code-401) | Unauthorized - actually "Unauthenticated": credentials are not valid for the target resource. User must log in. | `<all>`
+  [403](#status-code-403) | Forbidden - the user is not authorized to use this resource.|`<all>`
+  [404](#status-code-404) | Not found - the resource is not found. |`<all>`
+  [405](#status-code-405) | Method Not Allowed - the method is not supported, see [`OPTIONS`](#options).| `<all>`
+  [406](#status-code-406) | Not Acceptable - resource can only generate content not acceptable according to the Accept headers sent in the request. | `<all>`
+  [408](#status-code-408)| Request timeout - the server times out waiting for the resource. | `<all>`
+  [409](#status-code-409) | Conflict - request cannot be completed due to conflict with the current state of the target resource. For instance, in situations where two clients try to create the same resource or if there are concurrent, conflicting updates. | [`POST`](#post), `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
+  [410](#status-code-410) | Gone - resource does not exist any longer, e.g. when accessing a resource that has intentionally been deleted. | `<all>`
+  [412](#status-code-412)| Precondition Failed - returned for conditional requests, e.g. [`If-Match`](https://tools.ietf.org/html/rfc7232#section-3.1) if the condition failed. Used for optimistic locking. | `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
+  [415](#status-code-415) | Unsupported Media Type - e.g. clients sends request body without content type. | [`POST`](#post), `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
+  [423](#status-code-423) | Locked - Pessimistic locking, e.g. processing states. | `PUT`, [`PATCH`](#patch), [`DELETE`](#delete)
+  [428](#status-code-428) | Precondition Required - server requires the request to be conditional, e.g. to make sure that the "lost update problem" is avoided (see [**MAY** consider to support `Prefer` header to handle processing preferences](#181)).|`<all>`
+  [429](#status-code-429) | Too many requests - the client does not consider rate limiting and sent too many requests (see [**MUST** use code 429 with headers for rate limits](#153)).| `<all>`
+
+  <br />
+
+  ### **[Server side error codes:](#server-side-error-codes)**
+ 
   Code | Meaning | Methods
-    |-|-|-|
-    [500](#status-code-500)| Internal Server Error - a generic error indication for an unexpected server execution problem (here, client retry may be sensible)| `<all>`
-    [501](#status-code-501)|Not Implemented - server cannot fulfill the request (usually implies future availability, e.g. new feature). | `<all>`
-    [503](#status-code-503) | Service Unavailable - service is (temporarily) not available (e.g. if a required component or downstream service is not available) — client retry may be sensible. If possible, the service should indicate how long the client should wait by setting the [`Retry-After`](https://tools.ietf.org/html/rfc7231#section-7.1.3) header. | `<all>`
+  |-|-|-|
+  [500](#status-code-500)| Internal Server Error - a generic error indication for an unexpected server execution problem (here, client retry may be sensible)| `<all>`
+  [501](#status-code-501)|Not Implemented - server cannot fulfill the request (usually implies future availability, e.g. new feature). | `<all>`
+  [503](#status-code-503) | Service Unavailable - service is (temporarily) not available (e.g. if a required component or downstream service is not available) — client retry may be sensible. If possible, the service should indicate how long the client should wait by setting the [`Retry-After`](https://tools.ietf.org/html/rfc7231#section-7.1.3) header. | `<all>`
 
 
   ## **MUST** use most specific HTTP status codes
     
-    You must use the most specific HTTP status code when returning information about your request processing status or error situations.
+  You must use the most specific HTTP status code when returning information about your request processing status or error situations.
 
-    For example returning a 500 status error code for a resource not found (404) would be a violation of this rule
+  For example returning a 500 status error code for a resource not found (404) would be a violation of this rule
 
   
 # HTTP Headers
