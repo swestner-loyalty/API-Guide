@@ -537,11 +537,17 @@ In these scenarios, [overloaded POST](#may-use-overloaded-post) will need to be 
   
   Avoid the techique below if at all possible 
 
-  In some very specific scenarios it might be not be possible to use the REST verbs as intended. A good example is a bodyless requests verbs like GET or DELETE may not be able to avoid requiring a request body. One scenario is when it is not allowable to expose sensitive information (e.g. PI, credit card numbers etc) within the URL since it will be exposed to various caching and logging technologies (browser cache, CDN, Splunk etc). Or the query parameters could exceed size limits of a piece of technology in the stack (e.g. clients, load-balancers, and servers). 
-
-  In cases like this it is advised to use overloaded POST as a technique to overcome this limitation. 
+  In some very specific scenarios it might be not be possible to use the REST verbs as intended. A good example is a bodyless requests verbs like `GET` or `DELETE` may not be able to avoid requiring a request body. Scenarios could include 
   
-  In this case we use the POST VERB for a GET or DELETE operation, and make sure we explicitly note the exception in our documentation like so :
+  *  There sensitive information (e.g. PI, credit card numbers etc) within the URL that could be exposed to various caching and logging technologies (browser cache, CDN, Splunk etc)
+
+  * The query parameters are complex, and can not be reasonable expressed in a query string (see [**SHOULD** design complex query languages using JSON](#should-design-complex-query-languages-using-json))  
+  
+  * The query parameters are excessively large and could exceed size limits of a piece of technology in the stack (e.g. clients, load-balancers, and servers). 
+  
+  In cases like these it is advised to use overloaded `POST` as a technique to overcome the given limitation
+  
+  In this case we use the HTTP VERB `POST`  for a `GET` or `DELETE` operation, and make sure we explicitly note the exception in our documentation like so :
 
     paths:
       /collectors:
