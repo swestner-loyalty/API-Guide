@@ -971,7 +971,7 @@ In specific situations, where a (known) input field is not needed anymore, it ei
 
   ## **MUST** use standard formats for date and time properties 
 
-  As a specific case of `**SHOULD** use standard data formats`, you must use the `string` typed formats `date`, `date-time`, `time`, `duration`, or `period` for the definition of date and time properties. The formats are based on the standard [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile -- a subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601)
+  As a specific case of `SHOULD use standard data formats`, you must use the `string` typed formats `date`, `date-time`, `time`, `duration`, or `period` for the definition of date and time properties. The formats are based on the standard [RFC 3339](https://tools.ietf.org/html/rfc3339) internet profile -- a subset of [ISO 8601](https://tools.ietf.org/html/rfc3339#ref-ISO8601)
 
   **Exception:** For passing date/time information via standard protocol headers, HTTP [RFC 7231](https://tools.ietf.org/html/rfc7231#section-7.1.1.1) requires to follow the date and time specification used by the Internet Message Format [RFC 5322](https://tools.ietf.org/html/rfc5322).
 
@@ -980,7 +980,7 @@ In specific situations, where a (known) input field is not needed anymore, it ei
 
   ## **MUST** use standard formats for country, language and currency properties 
 
-  As a specific case of `**MUST** use standard data formats` you must use the following standard formats:
+  As a specific case of `MUST use standard data formats` you must use the following standard formats:
 
   *   Country codes: [ISO 3166-1-alpha2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) two letter country codes indicated via OpenAPI format `iso-3166`
       
