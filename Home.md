@@ -1,9 +1,8 @@
 # AMRP API Platform Design Standards
-
 - [AMRP API Platform Design Standards](#amrp-api-platform-design-standards)
-  - [# Introduction](#-introduction)
+  - [Introduction](#introduction)
   - [Document Semantics, Formatting, and Naming](#document-semantics-formatting-and-naming)
-  - [# Principles](#-principles)
+  - [Principles](#principles)
     - [API design principles](#api-design-principles)
     - [API as a product](#api-as-a-product)
     - [API first](#api-first)
@@ -76,10 +75,8 @@
   - [**MUST** use standard formats for country, language and currency properties](#must-use-standard-formats-for-country-language-and-currency-properties)
   - [**SHOULD** use content negotiation, if clients may choose from different resource representations](#should-use-content-negotiation-if-clients-may-choose-from-different-resource-representations)
 - [Accredidation](#accredidation)
-
     
-
-# [Introduction](#introduction)
+# Introduction
 --------------------
 The purpose of this document is to ensure consistency and the standard application of practices when designing and implementing API's at AMRP. It details the requirements, conventions and best practices on how to create an API that is maintainable, extensible, discoverable and consistent. This facilitates a great developer experience and the ability to quickly compose business value.
 
